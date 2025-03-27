@@ -83,5 +83,5 @@ async function triggerEmbeddingGeneration() {
 }
 
 // Replace these with your actual GitHub username and repository name
-const GITHUB_USERNAME = 'your-username';
+const GITHUB_USERNAME = 'Sladed49er';
 const GITHUB_REPO = 'email-ai-knowledge-base';
