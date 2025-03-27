@@ -1,0 +1,34 @@
+Vendor: Google
+Website: https://www.google.com / https://workspace.google.com
+Category: Productivity / Cloud Infrastructure / AI / Communication
+
+Overview:
+Google offers the Workspace suite (formerly G Suite), cloud infrastructure via Google Cloud Platform (GCP), and AI-enhanced productivity tools. It powers a variety of SMBs and startups, and is popular among agencies prioritizing simplicity, Gmail, and collaboration.
+
+Core Offerings:
+- Gmail (business-grade email)
+- Google Drive / Docs / Sheets / Slides
+- Google Meet & Chat
+- Google Cloud Platform (compute, storage, AI tools)
+- Android Enterprise (device management)
+- Chrome Enterprise
+
+Integration Capabilities:
+- Native integration with:
+  - Zoom
+  - RingCentral
+  - Salesforce
+  - HubSpot
+  - Asana, Monday, Trello
+  - Adobe tools
+  - Most CRMs and VoIP systems
+- Open APIs for custom integration via Google Apps Script or GCP
+
+Use Cases for Insurance Agencies:
+- Cost-effective email and file sharing with Gmail + Drive
+- Real-time team collaboration in Docs/Sheets
+- Google Voice as a lightweight VoIP solution
+- AI-powered document parsing and search
+
+AI Summary:
+Google is ideal for agencies that prioritize cloud-native tools, ease of use, and AI-powered productivity. It works best with nimble agencies or startups that want to reduce infrastructure complexity.
