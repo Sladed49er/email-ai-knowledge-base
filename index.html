@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email AI Knowledge Base</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Email AI Knowledge Base</h1>
+  
+  <p>This repository serves as a knowledge base for an AI-powered email assistant. The data is organized in a way that allows AI systems to search and update the information.</p>
+  
+  <h2>Repository Structure</h2>
+  <ul>
+    <li><strong>/data/</strong> - Contains vendor information and email templates in markdown format</li>
+    <li><strong>/vectors/</strong> - Stores embedding vectors for semantic search</li>
+    <li><strong>/api/</strong> - Simple API endpoints for searching and updating the knowledge base</li>
+    <li><strong>/admin/</strong> - Admin interface for managing the knowledge base</li>
+  </ul>
+  
+  <h2>Using with Power Automate</h2>
+  <p>To use this knowledge base with Microsoft Power Automate, you can create a flow that:</p>
+  
+  <ol>
+    <li>Triggers when an email arrives</li>
+    <li>Extracts the email content</li>
+    <li>Sends an HTTP request to the search API endpoint</li>
+    <li>Uses the retrieved knowledge in your AI prompt</li>
+  </ol>
+  
+  <h3>Example Power Automate HTTP Request</h3>
+  <pre>
+Method: GET
+URL: https://[your-username].github.io/email-ai-knowledge-base/api/?action=search&query={{encodeURIComponent(triggerBody()?['Content'])}}}&token=YOUR_SECRET_TOKEN
+  </pre>
+  
+  <h2>AI Modification</h2>
+  <p>The knowledge base can be updated by AI assistants using the AI interface endpoint:</p>
+  
+  <pre>
+Method: GET
+URL: https://[your-username].github.io/email-ai-knowledge-base/api/?action=ai&instruction=update data/vendor-example.md with content: ```# Vendor: Updated Information...```&token=YOUR_SECRET_TOKEN
+  </pre>
+  
+  <h2>Admin Access</h2>
+  <a href="admin/" class="button">Go to Admin Interface</a>
+</body>
+</html>
