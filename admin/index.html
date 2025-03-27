@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Knowledge Base Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    textarea {
+      min-height: 200px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      white-space: pre-wrap;
+    }
+    .file-list {
+      margin-top: 20px;
+      background-color: #f8f8f8;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    .file-item {
+      cursor: pointer;
+      padding: 5px;
+      margin: 2px 0;
+    }
+    .file-item:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Knowledge Base Admin</h1>
+    
+    <div>
+      <h2>Setup</h2>
+      <div class="form-group">
+        <label>GitHub Token:</label>
+        <input type="text" id="github-token" placeholder="Your GitHub personal access token">
+      </div>
+      <div class="form-group">
+        <label>OpenAI API Key:</label>
+        <input type="text" id="openai-key" placeholder="Your OpenAI API key">
+      </div>
+      <button id="setup-btn">Save Keys</button>
+    </div>
+    
+    <div>
+      <h2>Files</h2>
+      <button id="refresh-files-btn">Refresh File List</button>
+      <div id="file-list" class="file-list">Loading files...</div>
+    </div>
+    
+    <div>
+      <h2>Edit File</h2>
+      <div class="form-group">
+        <label>File Path:</label>
+        <input type="text" id="filepath" placeholder="data/vendor-name.md">
+      </div>
+      <div class="form-group">
+        <label>Content:</label>
+        <textarea id="content"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Commit Message:</label>
+        <input type="text" id="message" placeholder="Updated vendor information">
+      </div>
+      <button id="save-btn">Save File</button>
+    </div>
+    
+    <div id="result" class="result" style="display: none;"></div>
+  </div>
+  
+  <script src="../api/update.js"></script>
+  <script>
+    // Setup event listeners
+    document.getElementById('setup-btn').addEventListener('click', function() {
+      const githubToken = document.getElementById('github-token').value;
+      const openaiKey = document.getElementById('openai-key').value;
+      
+      if (githubToken) {
+        sessionStorage.setItem('github_token', githubToken);
+      }
+      
+      if (openaiKey) {
+        sessionStorage.setItem('openai_key', openaiKey);
+      }
+      
+      alert('Keys saved to session storage');
+    });
+    
+    // Load file list
+    document.getElementById('refresh-files-btn').addEventListener('click', loadFileList);
+    
+    async function loadFileList() {
+      const fileListElement = document.getElementById('file-list');
+      fileListElement.textContent = 'Loading files...';
+      
+      try {
+        const token = sessionStorage.getItem('github_token');
+        if (!token) {
+          throw new Error('GitHub token not set');
+        }
+        
+        const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/git/trees/main?recursive=1`, {
+          headers: {
+            'Authorization': 'token ' + token
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to load file list');
+        }
+        
+        const data = await response.json();
+        
+        // Filter for markdown files in data directory
+        const files = data.tree.filter(item => 
+          item.type === 'blob' && 
+          item.path.startsWith('data/') && 
+          item.path.endsWith('.md')
+        );
+        
+        if (files.length === 0) {
+          fileListElement.textContent = 'No data files found';
+          return;
+        }
+        
+        // Create file list
+        fileListElement.innerHTML = '';
+        files.forEach(file => {
+          const fileItem = document.createElement('div');
+          fileItem.className = 'file-item';
+          fileItem.textContent = file.path;
+          fileItem.addEventListener('click', () => loadFile(file.path));
+          fileListElement.appendChild(fileItem);
+        });
+      } catch (error) {
+        fileListElement.textContent = 'Error: ' + error.message;
+      }
+    }
+    
+    // Load a file for editing
+    async function loadFile(path) {
+      try {
+        const fileData = await getFileContent(path);
+        if (!fileData) {
+          throw new Error('Failed to load file');
+        }
+        
+        document.getElementById('filepath').value = path;
+        document.getElementById('content').value = fileData.content;
+        document.getElementById('message').value = 'Updated ' + path;
+      } catch (error) {
+        showResult('Error loading file: ' + error.message);
+      }
+    }
+    
+    // Save file
+    document.getElementById('save-btn').addEventListener('click', async function() {
+      const filepath = document.getElementById('filepath').value;
+      const content = document.getElementById('content').value;
+      const message = document.getElementById('message').value;
+      
+      if (!filepath || !content || !message) {
+        showResult('All fields are required');
+        return;
+      }
+      
+      try {
+        const result = await updateKnowledgeBase(filepath, content, message);
+        showResult('Result: ' + JSON.stringify(result, null, 2));
+        
+        if (result.success) {
+          loadFileList();
+        }
+      } catch (error) {
+        showResult('Error saving file: ' + error.message);
+      }
+    });
+    
+    // Display result
+    function showResult(text) {
+      const resultElement = document.getElementById('result');
+      resultElement.textContent = text;
+      resultElement.style.display = 'block';
+    }
+    
+    // Load file list on page load
+    window.addEventListener('load', function() {
+      // Check if keys are set
+      const githubToken = sessionStorage.getItem('github_token');
+      const openaiKey = sessionStorage.getItem('openai_key');
+      
+      if (githubToken) {
+        document.getElementById('github-token').value = '********';
+      }
+      
+      if (openaiKey) {
+        document.getElementById('openai-key').value = '********';
+      }
+      
+      if (githubToken) {
+        loadFileList();
+      }
+    });
+  </script>
+</body>
+</html>
