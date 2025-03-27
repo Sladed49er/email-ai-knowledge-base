@@ -1,0 +1,21 @@
+{
+  "vendors": [
+    {
+      "name": "Example Company",
+      "contact": {
+        "primary": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "accountId": "EX12345"
+      },
+      "templates": {
+        "price_inquiries": "When responding to price inquiries for Example Company, mention that they are on our Enterprise pricing tier with a 15% discount on all services.",
+        "support_requests": "For support requests from Example Company, always acknowledge receipt within 2 hours and assign ticket number with EXC prefix."
+      },
+      "notes": [
+        "Renewal date: January 15, 2026",
+        "Interested in expanding to our premium services"
+      ],
+      "keywords": ["example", "enterprise", "pricing", "support", "renewal"]
+    }
+  ]
+}
