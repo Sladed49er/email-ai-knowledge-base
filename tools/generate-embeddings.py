@@ -9,8 +9,8 @@ import markdown
 # You'll need to set your OpenAI API key as an environment variable
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-REPO_OWNER = "your-username"  # Replace with your GitHub username
-REPO_NAME = "email-ai-knowledge-base"  # Replace with your repo name
+REPO_OWNER = "Sladed49er"  # Updated with your GitHub username
+REPO_NAME = "email-ai-knowledge-base"  # Your repository name
 
 # GitHub API functions
 def get_file_content(path):
@@ -81,12 +81,16 @@ def process_files():
     data_files = get_data_files()
     all_vectors = []
     
+    print(f"Found {len(data_files)} markdown files to process")
+    
     for file_path in data_files:
         if not file_path.endswith(".md") or file_path.endswith("README.md"):
             continue
             
+        print(f"Processing {file_path}...")
         content, _ = get_file_content(file_path)
         if not content:
+            print(f"Could not retrieve content for {file_path}")
             continue
             
         # Convert markdown to text
@@ -94,40 +98,50 @@ def process_files():
         text = BeautifulSoup(html, "html.parser").get_text()
         
         # Generate embedding
+        print(f"Generating embedding for {file_path}...")
         embedding = generate_embedding(text)
         if not embedding:
+            print(f"Failed to generate embedding for {file_path}")
             continue
             
         # Create vector file
-        vector_data = {
-            "text": text,
-            "embedding": embedding,
-            "file": file_path
-        }
-        
         vector_file_path = f"vectors/{os.path.basename(file_path).replace('.md', '.json')}"
-        update_file(
+        print(f"Saving vector to {vector_file_path}...")
+        update_result = update_file(
             vector_file_path,
-            json.dumps(vector_data, indent=2),
+            json.dumps(vector_data := {
+                "text": text,
+                "embedding": embedding,
+                "file": file_path
+            }, indent=2),
             f"Generated embedding for {file_path}"
         )
         
-        # Add to index
-        all_vectors.append({
-            "file": file_path,
-            "vector_file": vector_file_path
-        })
-        
-        print(f"Processed {file_path}")
+        if update_result:
+            print(f"Successfully saved vector for {file_path}")
+            # Add to index
+            all_vectors.append({
+                "file": file_path,
+                "vector_file": vector_file_path
+            })
+        else:
+            print(f"Failed to save vector for {file_path}")
     
     # Create index file
-    update_file(
+    print(f"Creating index file with {len(all_vectors)} vectors...")
+    update_result = update_file(
         "vectors/index.json",
         json.dumps(all_vectors, indent=2),
         "Updated vector index"
     )
     
+    if update_result:
+        print("Successfully created index file")
+    else:
+        print("Failed to create index file")
+    
     print("Vector generation complete")
 
 if __name__ == "__main__":
+    print(f"Starting embedding generation for {REPO_OWNER}/{REPO_NAME}")
     process_files()
