@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Knowledge Base API</title>
+  <script src="search.js"></script>
+  <script src="update.js"></script>
+  <script src="ai-interface.js"></script>
+</head>
+<body>
+  <div id="result"></div>
+  
+  <script>
+    // Set placeholder for result
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = 'Processing request...';
+    
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const action = urlParams.get('action');
+    const query = urlParams.get('query');
+    const token = urlParams.get('token');
+    const instruction = urlParams.get('instruction');
+    
+    // Function to handle the API request
+    async function handleRequest() {
+      try {
+        // Simple token validation
+        if (token !== 'YOUR_SECRET_TOKEN') {
+          throw new Error('Invalid authentication token');
+        }
+        
+        let result;
+        
+        // Process based on action
+        if (action === 'search' && query) {
+          // Search the knowledge base
+          result = await searchKnowledgeBase(query);
+        }
+        else if (action === 'ai' && instruction) {
+          // Process AI instruction
+          result = await processAIRequest(instruction);
+        }
+        else {
+          throw new Error('Invalid request parameters');
+        }
+        
+        // Display and return the result
+        resultElement.textContent = JSON.stringify(result, null, 2);
+      }
+      catch (error) {
+        console.error('API error:', error);
+        resultElement.textContent = JSON.stringify({
+          error: error.message
+        }, null, 2);
+      }
+    }
+    
+    // Process the request
+    handleRequest();
+  </script>
+</body>
+</html>
