@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "file": "data/vendor-example.md",
+      "title": "Example Company",
+      "text": "This is information about Example Company including contact details and email templates.",
+      "relevance": 0.95
+    }
+  ],
+  "message": "This is a static data file that can be used while the search API is being configured."
+}
