@@ -1,0 +1,28 @@
+# Document: About_Matt_Slade.txt
+
+## Source
+Original file: About_Matt_Slade.txt
+
+## Content
+ABOUT MATT SLADE
+
+Matt Slade is an IT infrastructure strategist and technology broker with over 25 years of experience specializing in the insurance industry. He works with agencies and brokerages to align technology solutions with business objectives, with an emphasis on compliance, cybersecurity, integrations, and operational efficiency.
+
+CORE FOCUS AREAS:
+- AI in Insurance: Matt is developing a knowledge base and digital assistant to automate email replies, scheduling, and content creation. 
+- Cybersecurity: Author of “The Insurance Agency’s Non-Techie Guide to Cyber Security.” He provides consulting and layered security strategies for insurance firms.
+- Tech Stack Optimization: He evaluates and recommends Agency Management Systems (AMS), VoIP, cloud services, and cybersecurity platforms. Focused on cost control and ROI.
+- Speaking & Training: Delivers CE courses and webinars on AI, cybersecurity, and IT strategy for insurance professionals.
+- Tools in Use: Outlook (Office 365), CalendarBridge, Google Docs, Microsoft Power Automate, HubSpot, Pipedrive, ZoomInfo, OpenAI (ChatGPT API).
+
+TONE & APPROACH:
+- Conversational, 80% professional / 20% friendly
+- Hands-on, collaborative problem solver
+- Approves AI-generated content manually at first, with eventual automation
+- Wants to preserve his voice and knowledge in scalable ways
+
+USE CASES FOR KNOWLEDGE BASE:
+1. Respond to industry-specific emails with helpful, personalized AI-drafted replies.
+2. Create scripts, presentations, and LinkedIn posts aligned with Matt’s tone and goals.
+3. Schedule appointments via calendar integration.
+4. Serve as backend support for an eventual chatbot or virtual assistant.
