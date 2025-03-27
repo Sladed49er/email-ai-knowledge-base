@@ -1,0 +1,34 @@
+# Document: Microsoft.txt
+
+## Source
+Original file: Microsoft.txt
+
+## Content
+**Vendor Name:** Microsoft
+**Website:** https://www.microsoft.com
+**Category:** Cloud Services, Productivity, Operating Systems, Communication
+**Overview:**
+Microsoft offers a comprehensive suite of services including Microsoft 365 for productivity, Azure for cloud computing, Teams for communication, and Windows for operating systems. It is a cornerstone vendor for most businesses, especially in regulated industries.
+
+**Core Offerings:**
+- Microsoft 365 (Outlook, Word, Excel, Teams, OneDrive)
+- Microsoft Azure (Cloud infrastructure and services)
+- Windows OS
+- Microsoft Defender for Business (Cybersecurity)
+- Power Platform (Power BI, Power Automate, Power Apps)
+
+**Ideal For:**
+- Agencies requiring email, document collaboration, and cloud storage
+- Enterprises using Windows-based infrastructure
+- Those seeking secure cloud and hybrid solutions
+
+**Integrations:**
+- Microsoft 365 integrates with most CRM platforms (Salesforce, HubSpot, Zoho)
+- Native integrations with Zoom, RingCentral, 8x8, Adobe
+- Microsoft Azure supports secure VDI solutions, including integration with Venn and AWS
+- Power Automate connects with over 500 apps including SharePoint, Gmail, Slack, and more
+
+**Notes:**
+- Strong compliance frameworks for HIPAA, SOC 2, and financial regulations
+- Dominant player in the insurance and financial verticals
+
