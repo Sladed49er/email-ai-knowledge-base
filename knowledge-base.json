@@ -1,21 +1,2771 @@
 {
   "vendors": [
     {
-      "name": "Example Company",
+      "name": "8x8.txt",
       "contact": {
-        "primary": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "accountId": "EX12345"
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
       },
       "templates": {
-        "price_inquiries": "When responding to price inquiries for Example Company, mention that they are on our Enterprise pricing tier with a 15% discount on all services.",
-        "support_requests": "For support requests from Example Company, always acknowledge receipt within 2 hours and assign ticket number with EXC prefix."
+        "price_inquiries": "",
+        "support_requests": ""
       },
-      "notes": [
-        "Renewal date: January 15, 2026",
-        "Interested in expanding to our premium services"
+      "notes": [],
+      "keywords": [
+        "8x8.txt",
+        "8x8",
+        "example.com"
       ],
-      "keywords": ["example", "enterprise", "pricing", "support", "renewal"]
+      "source_file": "8x8.md"
+    },
+    {
+      "name": "About_Matt_Slade.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "about_matt_slade.txt",
+        "about_matt_slade",
+        "example.com"
+      ],
+      "source_file": "About_Matt_Slade.md"
+    },
+    {
+      "name": "Adobe.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "adobe",
+        "example.com",
+        "adobe.txt"
+      ],
+      "source_file": "Adobe.md"
+    },
+    {
+      "name": "Afore 1.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "afore",
+        "afore 1.pdf",
+        "afore 1"
+      ],
+      "source_file": "Afore 1.md"
+    },
+    {
+      "name": "Afore Cyber.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "afore cyber.pdf",
+        "afore",
+        "example.com",
+        "afore cyber",
+        "cyber"
+      ],
+      "source_file": "Afore Cyber.md"
+    },
+    {
+      "name": "After Zoe's Edits - The Insurance Agency's Non-Techie Guide to - Matthew Slade.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "after",
+        "slade",
+        "after zoe's edits - the insurance agency's non-techie guide to - matthew slade.pdf",
+        "techie",
+        "example.com",
+        "agency",
+        "matthew",
+        "after zoe's edits - the insurance agency's non-techie guide to - matthew slade",
+        "edits",
+        "guide"
+      ],
+      "source_file": "After Zoe's Edits - The Insurance Agency's Non-Techie Guide to - Matthew Slade.md"
+    },
+    {
+      "name": "After Zoe's Edits The Insurance Agency's Non-Techie Guide to Cyber Security.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "security",
+        "insurance",
+        "after zoe's edits the insurance agency's non-techie guide to cyber security.pdf",
+        "after",
+        "after zoe's edits the insurance agency's non-techie guide to cyber security",
+        "techie",
+        "example.com",
+        "agency",
+        "cyber",
+        "edits",
+        "guide"
+      ],
+      "source_file": "After Zoe's Edits The Insurance Agency's Non-Techie Guide to Cyber Security.md"
+    },
+    {
+      "name": "all_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "all_companies.csv",
+        "all_companies"
+      ],
+      "source_file": "all_companies.md"
+    },
+    {
+      "name": "AppliedEpic.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "appliedepic",
+        "appliedepic.txt"
+      ],
+      "source_file": "AppliedEpic.md"
+    },
+    {
+      "name": "Backup of Mansur.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "backup of mansur",
+        "docx",
+        "backup",
+        "example.com",
+        "backup of mansur.docx",
+        "mansur"
+      ],
+      "source_file": "Backup of Mansur.md"
+    },
+    {
+      "name": "Basic Shoretel Implementation.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "basic shoretel implementation.pdf",
+        "example.com",
+        "basic shoretel implementation",
+        "shoretel",
+        "implementation",
+        "basic"
+      ],
+      "source_file": "Basic Shoretel Implementation.md"
+    },
+    {
+      "name": "Biggs Insurance Case Study.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "biggs insurance case study",
+        "biggs insurance case study.pdf",
+        "example.com",
+        "case",
+        "biggs",
+        "study"
+      ],
+      "source_file": "Biggs Insurance Case Study.md"
+    },
+    {
+      "name": "book_1.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "book_1.docx",
+        "book_1",
+        "docx",
+        "example.com"
+      ],
+      "source_file": "book_1.md"
+    },
+    {
+      "name": "Both Case Studies.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "both case studies.pdf",
+        "both case studies",
+        "example.com",
+        "case",
+        "studies",
+        "both"
+      ],
+      "source_file": "Both Case Studies.md"
+    },
+    {
+      "name": "BTC.com Bitcoin Wallet Recovery Backup Sheet - mywallet-1c99cae8d217aaad 2.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "btc.com bitcoin wallet recovery backup sheet - mywallet-1c99cae8d217aaad 2.pdf",
+        "btc.com bitcoin wallet recovery backup sheet - mywallet-1c99cae8d217aaad 2",
+        "backup",
+        "wallet",
+        "example.com",
+        "1c99cae8d217aaad",
+        "bitcoin",
+        "sheet",
+        "recovery",
+        "mywallet"
+      ],
+      "source_file": "BTC.com Bitcoin Wallet Recovery Backup Sheet - mywallet-1c99cae8d217aaad 2.md"
+    },
+    {
+      "name": "BTC.com Bitcoin Wallet Recovery Backup Sheet - mywallet-1c99cae8d217aaad.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "btc.com bitcoin wallet recovery backup sheet - mywallet-1c99cae8d217aaad",
+        "backup",
+        "wallet",
+        "example.com",
+        "1c99cae8d217aaad",
+        "bitcoin",
+        "sheet",
+        "recovery",
+        "btc.com bitcoin wallet recovery backup sheet - mywallet-1c99cae8d217aaad.pdf",
+        "mywallet"
+      ],
+      "source_file": "BTC.com Bitcoin Wallet Recovery Backup Sheet - mywallet-1c99cae8d217aaad.md"
+    },
+    {
+      "name": "Business Case - Windstream.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "docx",
+        "example.com",
+        "windstream",
+        "case",
+        "business",
+        "business case - windstream",
+        "business case - windstream.docx"
+      ],
+      "source_file": "Business Case - Windstream.md"
+    },
+    {
+      "name": "Call Flow Wong & Associates.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "flow",
+        "call flow wong & associates",
+        "associates",
+        "call flow wong & associates.pdf",
+        "example.com",
+        "wong",
+        "call"
+      ],
+      "source_file": "Call Flow Wong & Associates.md"
+    },
+    {
+      "name": "Chart.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "chart.pdf",
+        "example.com",
+        "chart"
+      ],
+      "source_file": "Chart.md"
+    },
+    {
+      "name": "Cloud Implementation Proposal.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "proposal",
+        "cloud implementation proposal.pdf",
+        "cloud implementation proposal",
+        "cloud",
+        "example.com",
+        "implementation"
+      ],
+      "source_file": "Cloud Implementation Proposal.md"
+    },
+    {
+      "name": "Cloud Proposal.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "proposal",
+        "cloud proposal.docx",
+        "docx",
+        "cloud",
+        "example.com",
+        "cloud proposal"
+      ],
+      "source_file": "Cloud Proposal.md"
+    },
+    {
+      "name": "Comcast.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "comcast",
+        "comcast.txt"
+      ],
+      "source_file": "Comcast.md"
+    },
+    {
+      "name": "Comp.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "comp",
+        "example.com",
+        "comp.pdf"
+      ],
+      "source_file": "Comp.md"
+    },
+    {
+      "name": "conferenceroster2018.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "conferenceroster2018.pdf",
+        "conferenceroster2018",
+        "example.com"
+      ],
+      "source_file": "conferenceroster2018.md"
+    },
+    {
+      "name": "Confie Solution.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "confie solution",
+        "confie",
+        "docx",
+        "example.com",
+        "solution",
+        "confie solution.docx"
+      ],
+      "source_file": "Confie Solution.md"
+    },
+    {
+      "name": "Connectivity_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "connectivity_companies.csv",
+        "connectivity_companies"
+      ],
+      "source_file": "Connectivity_companies.md"
+    },
+    {
+      "name": "Copy of 8x8.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "copy of 8x8.txt",
+        "copy of 8x8",
+        "example.com",
+        "copy"
+      ],
+      "source_file": "Copy of 8x8.md"
+    },
+    {
+      "name": "Copy of GoTo.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "goto",
+        "copy of goto",
+        "example.com",
+        "copy",
+        "copy of goto.txt"
+      ],
+      "source_file": "Copy of GoTo.md"
+    },
+    {
+      "name": "Copy of Nextiva.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "copy of nextiva",
+        "example.com",
+        "copy",
+        "copy of nextiva.txt",
+        "nextiva"
+      ],
+      "source_file": "Copy of Nextiva.md"
+    },
+    {
+      "name": "Copy of RingCentral.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "copy of ringcentral.txt",
+        "example.com",
+        "copy",
+        "ringcentral",
+        "copy of ringcentral"
+      ],
+      "source_file": "Copy of RingCentral.md"
+    },
+    {
+      "name": "Copy of Zoom.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "zoom",
+        "example.com",
+        "copy",
+        "copy of zoom",
+        "copy of zoom.txt"
+      ],
+      "source_file": "Copy of Zoom.md"
+    },
+    {
+      "name": "Crest.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "crest",
+        "crest.pdf",
+        "example.com"
+      ],
+      "source_file": "Crest.md"
+    },
+    {
+      "name": "CSR24.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "docx",
+        "csr24.docx",
+        "example.com",
+        "csr24"
+      ],
+      "source_file": "CSR24.md"
+    },
+    {
+      "name": "Cyber Assurace Explainatory TFinn ltr032425.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "tfinn",
+        "docx",
+        "ltr032425",
+        "example.com",
+        "explainatory",
+        "cyber assurace explainatory tfinn ltr032425.docx",
+        "cyber assurace explainatory tfinn ltr032425",
+        "cyber",
+        "assurace"
+      ],
+      "source_file": "Cyber Assurace Explainatory TFinn ltr032425.md"
+    },
+    {
+      "name": "Cyber Security Book In the works.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "security",
+        "cyber security book in the works.docx",
+        "works",
+        "cyber security book in the works",
+        "docx",
+        "example.com",
+        "book",
+        "cyber"
+      ],
+      "source_file": "Cyber Security Book In the works.md"
+    },
+    {
+      "name": "Cyber Security Book.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "security",
+        "cyber security book.pdf",
+        "example.com",
+        "cyber security book",
+        "book",
+        "cyber"
+      ],
+      "source_file": "Cyber Security Book.md"
+    },
+    {
+      "name": "Cybersecurity_Strategy.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "cybersecurity_strategy.docx",
+        "docx",
+        "cybersecurity_strategy"
+      ],
+      "source_file": "Cybersecurity_Strategy.md"
+    },
+    {
+      "name": "Devices_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "devices_companies",
+        "devices_companies.csv"
+      ],
+      "source_file": "Devices_companies.md"
+    },
+    {
+      "name": "Diamond cut net test.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "diamond",
+        "example.com",
+        "diamond cut net test",
+        "test",
+        "diamond cut net test.pdf"
+      ],
+      "source_file": "Diamond cut net test.md"
+    },
+    {
+      "name": "Digital Twin.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "digital twin",
+        "digital",
+        "digital twin.txt",
+        "example.com",
+        "twin"
+      ],
+      "source_file": "Digital Twin.md"
+    },
+    {
+      "name": "DRAFT The Insurance Agency's Non-Techie Guide to - Matthew Slade.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "techie",
+        "example.com",
+        "draft the insurance agency's non-techie guide to - matthew slade",
+        "agency",
+        "draft",
+        "draft the insurance agency's non-techie guide to - matthew slade.pdf",
+        "matthew",
+        "slade",
+        "guide"
+      ],
+      "source_file": "DRAFT The Insurance Agency's Non-Techie Guide to - Matthew Slade.md"
+    },
+    {
+      "name": "DRAFT w Zoe's notes - The Insurance Agency's Non-Techie Guide to - Matthew Slade[63].pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "draft w zoe's notes - the insurance agency's non-techie guide to - matthew slade[63]",
+        "notes",
+        "draft w zoe's notes - the insurance agency's non-techie guide to - matthew slade[63].pdf",
+        "techie",
+        "example.com",
+        "agency",
+        "draft",
+        "matthew",
+        "slade",
+        "guide"
+      ],
+      "source_file": "DRAFT w Zoe's notes - The Insurance Agency's Non-Techie Guide to - Matthew Slade[63].md"
+    },
+    {
+      "name": "Ducan Consulting.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "consulting",
+        "ducan consulting.pdf",
+        "example.com",
+        "ducan consulting",
+        "ducan"
+      ],
+      "source_file": "Ducan Consulting.md"
+    },
+    {
+      "name": "Duncan Check Up.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "duncan check up",
+        "docx",
+        "duncan check up.docx",
+        "example.com",
+        "check",
+        "duncan"
+      ],
+      "source_file": "Duncan Check Up.md"
+    },
+    {
+      "name": "Duncan Consulting Invoice.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "duncan consulting invoice",
+        "consulting",
+        "invoice",
+        "duncan consulting invoice.pdf",
+        "example.com",
+        "duncan"
+      ],
+      "source_file": "Duncan Consulting Invoice.md"
+    },
+    {
+      "name": "Duncan Invoice 3_14.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "duncan invoice 3_14.pdf",
+        "duncan invoice 3_14",
+        "invoice",
+        "3_14",
+        "example.com",
+        "duncan"
+      ],
+      "source_file": "Duncan Invoice 3_14.md"
+    },
+    {
+      "name": "Duncan Signed Quote.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "duncan signed quote",
+        "quote",
+        "example.com",
+        "duncan",
+        "duncan signed quote.pdf",
+        "signed"
+      ],
+      "source_file": "Duncan Signed Quote.md"
+    },
+    {
+      "name": "Duncan Upgrades.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "upgrades",
+        "example.com",
+        "duncan upgrades",
+        "duncan",
+        "duncan upgrades.pdf"
+      ],
+      "source_file": "Duncan Upgrades.md"
+    },
+    {
+      "name": "Duncanins-Audit.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "duncanins-audit.docx",
+        "duncanins-audit",
+        "audit",
+        "docx",
+        "example.com",
+        "duncanins"
+      ],
+      "source_file": "Duncanins-Audit.md"
+    },
+    {
+      "name": "ebook.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "docx",
+        "ebook.docx",
+        "example.com",
+        "ebook"
+      ],
+      "source_file": "ebook.md"
+    },
+    {
+      "name": "Energy_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "energy_companies.csv",
+        "energy_companies",
+        "example.com"
+      ],
+      "source_file": "Energy_companies.md"
+    },
+    {
+      "name": "Final Pricing.SRA.Bigleaf.SDWAN.QUOTE.2021.03.29.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "final pricing.sra.bigleaf.sdwan.quote.2021.03.29",
+        "quote",
+        "pricing",
+        "sdwan",
+        "example.com",
+        "bigleaf",
+        "2021",
+        "final pricing.sra.bigleaf.sdwan.quote.2021.03.29.pdf",
+        "final"
+      ],
+      "source_file": "Final Pricing.SRA.Bigleaf.SDWAN.QUOTE.2021.03.29.md"
+    },
+    {
+      "name": "For Edit The Insurance Agency's Non-Techie Guide to - Matthew Slade.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "for edit the insurance agency's non-techie guide to - matthew slade",
+        "insurance",
+        "techie",
+        "docx",
+        "for edit the insurance agency's non-techie guide to - matthew slade.docx",
+        "example.com",
+        "agency",
+        "matthew",
+        "edit",
+        "slade",
+        "guide"
+      ],
+      "source_file": "For Edit The Insurance Agency's Non-Techie Guide to - Matthew Slade.md"
+    },
+    {
+      "name": "Full industry source breakdown.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "full industry source breakdown",
+        "industry",
+        "docx",
+        "example.com",
+        "full",
+        "source",
+        "breakdown",
+        "full industry source breakdown.docx"
+      ],
+      "source_file": "Full industry source breakdown.md"
+    },
+    {
+      "name": "FusionConnect.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "fusionconnect",
+        "fusionconnect.txt",
+        "example.com"
+      ],
+      "source_file": "FusionConnect.md"
+    },
+    {
+      "name": "fw9.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "fw9.pdf",
+        "fw9",
+        "example.com"
+      ],
+      "source_file": "fw9.md"
+    },
+    {
+      "name": "Gonzales - Armadillo.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "gonzales - armadillo",
+        "armadillo",
+        "gonzales",
+        "gonzales - armadillo.pdf"
+      ],
+      "source_file": "Gonzales - Armadillo.md"
+    },
+    {
+      "name": "Google.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "google.txt",
+        "example.com",
+        "google"
+      ],
+      "source_file": "Google.md"
+    },
+    {
+      "name": "GoTo School Port.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "goto",
+        "example.com",
+        "school",
+        "goto school port",
+        "goto school port.pdf",
+        "port"
+      ],
+      "source_file": "GoTo School Port.md"
+    },
+    {
+      "name": "GoTo.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "goto",
+        "goto.txt",
+        "example.com"
+      ],
+      "source_file": "GoTo.md"
+    },
+    {
+      "name": "GPL License Terms.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "terms",
+        "license",
+        "example.com",
+        "gpl license terms",
+        "gpl license terms.pdf"
+      ],
+      "source_file": "GPL License Terms.md"
+    },
+    {
+      "name": "Hi Rich.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "docx",
+        "example.com",
+        "hi rich",
+        "rich",
+        "hi rich.docx"
+      ],
+      "source_file": "Hi Rich.md"
+    },
+    {
+      "name": "HOPP INSURANCE.PDF",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "hopp",
+        "example.com",
+        "hopp insurance.pdf",
+        "hopp insurance"
+      ],
+      "source_file": "HOPP INSURANCE.md"
+    },
+    {
+      "name": "HullCo Offer.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "offer",
+        "example.com",
+        "hullco",
+        "hullco offer.pdf",
+        "hullco offer"
+      ],
+      "source_file": "HullCo Offer.md"
+    },
+    {
+      "name": "Infrastructure_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "infrastructure_companies.csv",
+        "example.com",
+        "infrastructure_companies"
+      ],
+      "source_file": "Infrastructure_companies.md"
+    },
+    {
+      "name": "Insurance Specific Consulting[4].docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "specific",
+        "insurance specific consulting[4]",
+        "insurance",
+        "consulting",
+        "docx",
+        "insurance specific consulting[4].docx",
+        "example.com"
+      ],
+      "source_file": "Insurance Specific Consulting[4].md"
+    },
+    {
+      "name": "INV00229484_A00153126_09262016.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "inv00229484_a00153126_09262016",
+        "inv00229484_a00153126_09262016.pdf",
+        "example.com"
+      ],
+      "source_file": "INV00229484_A00153126_09262016.md"
+    },
+    {
+      "name": "Invoice Duncan Switches.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "switches",
+        "invoice duncan switches",
+        "invoice duncan switches.pdf",
+        "invoice",
+        "example.com",
+        "duncan"
+      ],
+      "source_file": "Invoice Duncan Switches.md"
+    },
+    {
+      "name": "Invoice Workplace.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "invoice",
+        "example.com",
+        "invoice workplace",
+        "invoice workplace.pdf",
+        "workplace"
+      ],
+      "source_file": "Invoice Workplace.md"
+    },
+    {
+      "name": "Invoice159668.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "invoice159668",
+        "example.com",
+        "invoice159668.pdf"
+      ],
+      "source_file": "Invoice159668.md"
+    },
+    {
+      "name": "IT Consolidation Solution 2016 Contract.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "it consolidation solution 2016 contract.pdf",
+        "example.com",
+        "it consolidation solution 2016 contract",
+        "solution",
+        "consolidation",
+        "2016",
+        "contract"
+      ],
+      "source_file": "IT Consolidation Solution 2016 Contract.md"
+    },
+    {
+      "name": "Jacobs Insurance.FiberProposal.2022.05.13.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "jacobs",
+        "example.com",
+        "jacobs insurance.fiberproposal.2022.05.13.pdf",
+        "fiberproposal",
+        "2022",
+        "jacobs insurance.fiberproposal.2022.05.13"
+      ],
+      "source_file": "Jacobs Insurance.FiberProposal.2022.05.13.md"
+    },
+    {
+      "name": "January Comcast Bill.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "january",
+        "january comcast bill",
+        "bill",
+        "comcast",
+        "january comcast bill.pdf"
+      ],
+      "source_file": "January Comcast Bill.md"
+    },
+    {
+      "name": "Loss Control.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "loss control",
+        "control",
+        "example.com",
+        "loss control.pdf",
+        "loss"
+      ],
+      "source_file": "Loss Control.md"
+    },
+    {
+      "name": "Magna5 Invoice.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "invoice",
+        "example.com",
+        "magna5 invoice",
+        "magna5 invoice.pdf",
+        "magna5"
+      ],
+      "source_file": "Magna5 Invoice.md"
+    },
+    {
+      "name": "Mansur 2025.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "mansur 2025",
+        "docx",
+        "2025",
+        "example.com",
+        "mansur",
+        "mansur 2025.docx"
+      ],
+      "source_file": "Mansur 2025.md"
+    },
+    {
+      "name": "Mansur.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "mansur",
+        "example.com",
+        "mansur.pdf"
+      ],
+      "source_file": "Mansur.md"
+    },
+    {
+      "name": "Master Agent VAR Program Ammendment[4].pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "agent",
+        "ammendment",
+        "program",
+        "master",
+        "example.com",
+        "master agent var program ammendment[4].pdf",
+        "master agent var program ammendment[4]"
+      ],
+      "source_file": "Master Agent VAR Program Ammendment[4].md"
+    },
+    {
+      "name": "Microsoft.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "microsoft.txt",
+        "microsoft"
+      ],
+      "source_file": "Microsoft.md"
+    },
+    {
+      "name": "Mythos Invoice.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "mythos invoice.pdf",
+        "invoice",
+        "example.com",
+        "mythos",
+        "mythos invoice"
+      ],
+      "source_file": "Mythos Invoice.md"
+    },
+    {
+      "name": "Network Test Results _ GoToConnect.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "network",
+        "network test results _ gotoconnect",
+        "results",
+        "gotoconnect",
+        "example.com",
+        "network test results _ gotoconnect.pdf",
+        "test"
+      ],
+      "source_file": "Network Test Results _ GoToConnect.md"
+    },
+    {
+      "name": "Nextiva Sales Quote.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "quote",
+        "nextiva sales quote.pdf",
+        "sales",
+        "example.com",
+        "nextiva sales quote",
+        "nextiva"
+      ],
+      "source_file": "Nextiva Sales Quote.md"
+    },
+    {
+      "name": "Nextiva.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "nextiva",
+        "nextiva.txt"
+      ],
+      "source_file": "Nextiva.md"
+    },
+    {
+      "name": "NICE.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "nice",
+        "nice.txt",
+        "example.com"
+      ],
+      "source_file": "NICE.md"
+    },
+    {
+      "name": "Ntirety.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "ntirety",
+        "ntirety.txt",
+        "example.com"
+      ],
+      "source_file": "Ntirety.md"
+    },
+    {
+      "name": "Omada Controller Upgrade Guide.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "guide",
+        "controller",
+        "example.com",
+        "omada",
+        "upgrade",
+        "omada controller upgrade guide",
+        "omada controller upgrade guide.pdf"
+      ],
+      "source_file": "Omada Controller Upgrade Guide.md"
+    },
+    {
+      "name": "One Year Quarterly Consulting.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "year",
+        "consulting",
+        "one year quarterly consulting",
+        "example.com",
+        "one year quarterly consulting.pdf",
+        "quarterly"
+      ],
+      "source_file": "One Year Quarterly Consulting.md"
+    },
+    {
+      "name": "Proposal Workplace.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "proposal",
+        "proposal workplace.pdf",
+        "example.com",
+        "proposal workplace",
+        "workplace"
+      ],
+      "source_file": "Proposal Workplace.md"
+    },
+    {
+      "name": "Proposal.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "proposal.pdf",
+        "proposal",
+        "example.com"
+      ],
+      "source_file": "Proposal.md"
+    },
+    {
+      "name": "Proposed IT Consolidation Solution 2016.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "proposed it consolidation solution 2016.pdf",
+        "proposed it consolidation solution 2016",
+        "example.com",
+        "consolidation",
+        "solution",
+        "proposed",
+        "2016"
+      ],
+      "source_file": "Proposed IT Consolidation Solution 2016.md"
+    },
+    {
+      "name": "Proposed IT Consolidation Solution_.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "proposed it consolidation solution_",
+        "proposed it consolidation solution_.pdf",
+        "example.com",
+        "consolidation",
+        "proposed",
+        "solution_"
+      ],
+      "source_file": "Proposed IT Consolidation Solution_.md"
+    },
+    {
+      "name": "Providers_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "providers_companies.csv",
+        "providers_companies"
+      ],
+      "source_file": "Providers_companies.md"
+    },
+    {
+      "name": "Quote Armadillo - Gonzales Boring.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "quote",
+        "quote armadillo - gonzales boring",
+        "quote armadillo - gonzales boring.pdf",
+        "example.com",
+        "boring",
+        "armadillo",
+        "gonzales"
+      ],
+      "source_file": "Quote Armadillo - Gonzales Boring.md"
+    },
+    {
+      "name": "Quote Armadillo-GonzalezBoring.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "quote armadillo-gonzalezboring.pdf",
+        "quote",
+        "gonzalezboring",
+        "quote armadillo-gonzalezboring",
+        "example.com",
+        "armadillo"
+      ],
+      "source_file": "Quote Armadillo-GonzalezBoring.md"
+    },
+    {
+      "name": "Quote_Duncan & Associates_10521.1.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "quote_duncan & associates_10521.1.pdf",
+        "quote_duncan",
+        "associates_10521",
+        "example.com",
+        "quote_duncan & associates_10521.1"
+      ],
+      "source_file": "Quote_Duncan & Associates_10521.1.md"
+    },
+    {
+      "name": "Rackspace.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "rackspace.txt",
+        "example.com",
+        "rackspace"
+      ],
+      "source_file": "Rackspace.md"
+    },
+    {
+      "name": "Release Note.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "release note",
+        "example.com",
+        "release note.pdf",
+        "release",
+        "note"
+      ],
+      "source_file": "Release Note.md"
+    },
+    {
+      "name": "RingCentral.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "ringcentral",
+        "ringcentral.txt",
+        "example.com"
+      ],
+      "source_file": "RingCentral.md"
+    },
+    {
+      "name": "Sample Case Studies.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "sample case studies",
+        "docx",
+        "example.com",
+        "sample",
+        "case",
+        "sample case studies.docx",
+        "studies"
+      ],
+      "source_file": "Sample Case Studies.md"
+    },
+    {
+      "name": "Sample Consulting.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "consulting",
+        "docx",
+        "sample consulting",
+        "example.com",
+        "sample",
+        "sample consulting.docx"
+      ],
+      "source_file": "Sample Consulting.md"
+    },
+    {
+      "name": "September18' roster.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "september18' roster",
+        "september18' roster.docx",
+        "docx",
+        "roster",
+        "example.com",
+        "september18"
+      ],
+      "source_file": "September18' roster.md"
+    },
+    {
+      "name": "Service Offering Details.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "offering",
+        "example.com",
+        "service",
+        "service offering details.pdf",
+        "details",
+        "service offering details"
+      ],
+      "source_file": "Service Offering Details.md"
+    },
+    {
+      "name": "Services_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "services_companies",
+        "services_companies.csv",
+        "example.com"
+      ],
+      "source_file": "Services_companies.md"
+    },
+    {
+      "name": "SheerPDX Contract.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "sheerpdx contract",
+        "example.com",
+        "sheerpdx contract.pdf",
+        "sheerpdx",
+        "contract"
+      ],
+      "source_file": "SheerPDX Contract.md"
+    },
+    {
+      "name": "Software_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "software_companies.csv",
+        "software_companies",
+        "example.com"
+      ],
+      "source_file": "Software_companies.md"
+    },
+    {
+      "name": "Spectrum Enteprise Fiber Quote -Jacobs Insurance Solutions-30mg.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "spectrum",
+        "spectrum enteprise fiber quote -jacobs insurance solutions-30mg.pdf",
+        "quote",
+        "jacobs",
+        "example.com",
+        "enteprise",
+        "30mg",
+        "spectrum enteprise fiber quote -jacobs insurance solutions-30mg",
+        "solutions",
+        "fiber"
+      ],
+      "source_file": "Spectrum Enteprise Fiber Quote -Jacobs Insurance Solutions-30mg.md"
+    },
+    {
+      "name": "Spectrum.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "spectrum.txt",
+        "spectrum"
+      ],
+      "source_file": "Spectrum.md"
+    },
+    {
+      "name": "Spectrum_Enterprise.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "spectrum_enterprise",
+        "spectrum_enterprise.txt",
+        "example.com"
+      ],
+      "source_file": "Spectrum_Enterprise.md"
+    },
+    {
+      "name": "SRA.Cost Comparison.ISP Only.2021.04.13.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "sra.cost comparison.isp only.2021.04.13",
+        "cost",
+        "example.com",
+        "comparison",
+        "2021",
+        "sra.cost comparison.isp only.2021.04.13.pdf",
+        "only"
+      ],
+      "source_file": "SRA.Cost Comparison.ISP Only.2021.04.13.md"
+    },
+    {
+      "name": "Stock Cert Templante.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "stock cert templante",
+        "stock",
+        "cert",
+        "docx",
+        "example.com",
+        "templante",
+        "stock cert templante.docx"
+      ],
+      "source_file": "Stock Cert Templante.md"
+    },
+    {
+      "name": "Summit Risk Advisors.Fusion Connect.ISP.Discounted Final Version.2021.04.09.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "summit",
+        "summit risk advisors.fusion connect.isp.discounted final version.2021.04.09",
+        "connect",
+        "discounted",
+        "example.com",
+        "risk",
+        "version",
+        "fusion",
+        "2021",
+        "summit risk advisors.fusion connect.isp.discounted final version.2021.04.09.pdf",
+        "final",
+        "advisors"
+      ],
+      "source_file": "Summit Risk Advisors.Fusion Connect.ISP.Discounted Final Version.2021.04.09.md"
+    },
+    {
+      "name": "Summit Update and Compliance.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "update",
+        "summit",
+        "compliance",
+        "example.com",
+        "summit update and compliance",
+        "summit update and compliance.pdf"
+      ],
+      "source_file": "Summit Update and Compliance.md"
+    },
+    {
+      "name": "Talking Scripts for Selling Vendor Solutions.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "scripts",
+        "docx",
+        "example.com",
+        "talking",
+        "vendor",
+        "talking scripts for selling vendor solutions.docx",
+        "solutions",
+        "selling",
+        "talking scripts for selling vendor solutions"
+      ],
+      "source_file": "Talking Scripts for Selling Vendor Solutions.md"
+    },
+    {
+      "name": "Technology Assement Duncan.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "duncan",
+        "example.com",
+        "technology assement duncan",
+        "technology assement duncan.pdf",
+        "technology",
+        "assement"
+      ],
+      "source_file": "Technology Assement Duncan.md"
+    },
+    {
+      "name": "Technology Assement.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "technology assement.pdf",
+        "example.com",
+        "technology",
+        "assement",
+        "technology assement"
+      ],
+      "source_file": "Technology Assement.md"
+    },
+    {
+      "name": "tf10000142_win321.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "tf10000142_win321.pdf",
+        "tf10000142_win321",
+        "example.com"
+      ],
+      "source_file": "tf10000142_win321.md"
+    },
+    {
+      "name": "The Hauser Group.Service Proposal.2022.09.29.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "proposal",
+        "group",
+        "hauser",
+        "the hauser group.service proposal.2022.09.29.pdf",
+        "example.com",
+        "service",
+        "the hauser group.service proposal.2022.09.29",
+        "2022"
+      ],
+      "source_file": "The Hauser Group.Service Proposal.2022.09.29.md"
+    },
+    {
+      "name": "The Insurance Agency's Non-Techie Guide to - Matthew Slade.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "techie",
+        "example.com",
+        "agency",
+        "matthew",
+        "the insurance agency's non-techie guide to - matthew slade.pdf",
+        "the insurance agency's non-techie guide to - matthew slade",
+        "slade",
+        "guide"
+      ],
+      "source_file": "The Insurance Agency's Non-Techie Guide to - Matthew Slade.md"
+    },
+    {
+      "name": "Time Warner.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "time warner.pdf",
+        "time warner",
+        "time",
+        "example.com",
+        "warner"
+      ],
+      "source_file": "Time Warner.md"
+    },
+    {
+      "name": "TPX.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "tpx",
+        "tpx.txt",
+        "example.com"
+      ],
+      "source_file": "TPX.md"
+    },
+    {
+      "name": "Tsunami Creative Slade Assignment of Contract Proceeds.2017.01.04-1.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "2017",
+        "assignment",
+        "creative",
+        "tsunami",
+        "tsunami creative slade assignment of contract proceeds.2017.01.04-1",
+        "example.com",
+        "proceeds",
+        "tsunami creative slade assignment of contract proceeds.2017.01.04-1.pdf",
+        "contract",
+        "slade"
+      ],
+      "source_file": "Tsunami Creative Slade Assignment of Contract Proceeds.2017.01.04-1.md"
+    },
+    {
+      "name": "vendor_details.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "example.com",
+        "vendor_details",
+        "vendor_details.csv"
+      ],
+      "source_file": "vendor_details.md"
+    },
+    {
+      "name": "Vendor_Integration_Map.docx",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "docx",
+        "vendor_integration_map.docx",
+        "vendor_integration_map",
+        "example.com"
+      ],
+      "source_file": "Vendor_Integration_Map.md"
+    },
+    {
+      "name": "Vern Fonk Case Study.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "vern fonk case study",
+        "example.com",
+        "vern",
+        "case",
+        "fonk",
+        "vern fonk case study.pdf",
+        "study"
+      ],
+      "source_file": "Vern Fonk Case Study.md"
+    },
+    {
+      "name": "Virsage Signed by Rich Office 365.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "virsage signed by rich office 365",
+        "virsage signed by rich office 365.pdf",
+        "virsage",
+        "example.com",
+        "rich",
+        "office",
+        "signed"
+      ],
+      "source_file": "Virsage Signed by Rich Office 365.md"
+    },
+    {
+      "name": "Vonage Quote - Hopp Insurance - 07 06 16.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "vonage quote - hopp insurance - 07 06 16",
+        "vonage",
+        "insurance",
+        "hopp",
+        "vonage quote - hopp insurance - 07 06 16.pdf",
+        "quote",
+        "example.com"
+      ],
+      "source_file": "Vonage Quote - Hopp Insurance - 07 06 16.md"
+    },
+    {
+      "name": "Welpland Insurance.pdf",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "insurance",
+        "welpland",
+        "welpland insurance.pdf",
+        "example.com",
+        "welpland insurance"
+      ],
+      "source_file": "Welpland Insurance.md"
+    },
+    {
+      "name": "Wireless_Mobility_companies.csv",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "wireless_mobility_companies.csv",
+        "wireless_mobility_companies",
+        "example.com"
+      ],
+      "source_file": "Wireless_Mobility_companies.md"
+    },
+    {
+      "name": "Zoom.txt",
+      "contact": {
+        "primary": "Unknown",
+        "email": "unknown@example.com",
+        "accountId": ""
+      },
+      "templates": {
+        "price_inquiries": "",
+        "support_requests": ""
+      },
+      "notes": [],
+      "keywords": [
+        "zoom",
+        "example.com",
+        "zoom.txt"
+      ],
+      "source_file": "Zoom.md"
     }
   ]
 }
