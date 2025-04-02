@@ -9,23 +9,19 @@
     <style>
         .highlight {
             background-color: #ffffcc;
-            padding: 0 2px;
+            font-weight: bold;
         }
         .result-card {
             transition: transform 0.2s;
+            border: 1px solid #e5e7eb;
         }
         .result-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
         .tab {
-            padding: 0.5rem 1rem;
             cursor: pointer;
+            padding: 10px 15px;
             border-bottom: 2px solid transparent;
         }
         .tab.active {
@@ -39,573 +35,517 @@
         .tab-content.active {
             display: block;
         }
-        .icon {
-            margin-right: 8px;
-        }
-        .icon-word {
-            color: #2b579a;
-        }
-        .icon-pdf {
-            color: #e74c3c;
-        }
-        .icon-excel {
-            color: #27ae60;
-        }
-        .icon-csv {
-            color: #27ae60;
-        }
-        .icon-txt {
-            color: #3498db;
-        }
-        .icon-globe {
-            color: #3498db;
-        }
-        .property-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .property-table tr {
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .property-table tr:last-child {
-            border-bottom: none;
-        }
-        .property-label {
-            font-weight: 600;
-            padding: 8px;
-            background-color: #f9fafb;
-            width: 160px;
-            vertical-align: top;
-        }
-        .property-value {
-            padding: 8px;
-        }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-        <header class="mb-8 text-center">
-            <h1 class="text-3xl font-bold text-blue-800">Knowledge Base Search</h1>
-            <p class="text-lg text-gray-600 mt-2">NetStar Inc. - Vendor & Technology Information</p>
-        </header>
-
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-2 text-blue-800">NetStar Inc. - Vendor & Technology Information</h1>
+        
         <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
             <div class="flex flex-col md:flex-row gap-2">
-                <input type="text" id="searchInput" placeholder="Search for vendors, technologies, or documents..." 
-                       class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="searchInput" class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                       placeholder="Search for vendors, files, or technologies...">
                 <button id="searchButton" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
                     Search
                 </button>
             </div>
-            <div class="mt-2 text-sm text-gray-500">
-                Try searching for: "GoTo", "cloud", "integrations", "docx", etc.
+            <div class="text-sm text-gray-500 mt-2">
+                Try searching for: "GoTo", "cloud", "integrations", "docx"
             </div>
             <div class="mt-3">
-                <label class="inline-flex items-center">
-                    <input type="checkbox" id="includeWebResults" class="form-checkbox h-4 w-4 text-blue-600" checked>
-                    <span class="ml-2 text-gray-700">Include web search results</span>
+                <label class="flex items-center">
+                    <input type="checkbox" id="includeWebResults" checked class="mr-2">
+                    <span>Include web search results</span>
                 </label>
             </div>
         </div>
 
-        <div id="searchResults" class="max-w-4xl mx-auto">
-            <div id="initialMessage" class="text-center text-gray-500 py-8">
-                Enter a search term to find information from your knowledge base
+        <div id="resultsSection" class="max-w-4xl mx-auto">
+            <div id="loadingIndicator" class="hidden text-center py-4">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div>
+                <p class="mt-2">Searching...</p>
             </div>
             
-            <div id="resultsContainer" class="hidden">
-                <div class="tabs">
+            <div id="initialMessage" class="text-center text-gray-500 py-8">
+                Enter a search term to find information from the knowledge base
+            </div>
+            
+            <div id="noResults" class="hidden text-center bg-gray-50 p-6 rounded-lg">
+                <p class="text-gray-700">No results found for your search.</p>
+                <p class="text-gray-500 mt-2">Try a different search term or check spelling.</p>
+            </div>
+            
+            <div id="tabsContainer" class="hidden border-b border-gray-200 mb-6">
+                <div class="flex">
                     <div class="tab active" data-tab="kb">Knowledge Base (<span id="kbCount">0</span>)</div>
                     <div class="tab" data-tab="web">Web Results (<span id="webCount">0</span>)</div>
                 </div>
-                
-                <div id="kbResults" class="tab-content active space-y-4"></div>
-                <div id="webResults" class="tab-content space-y-4"></div>
             </div>
             
-            <div id="loadingIndicator" class="hidden text-center py-8">
-                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-                <p class="mt-2 text-gray-600">Searching...</p>
-            </div>
-            
-            <div id="noResults" class="hidden text-center py-8 bg-gray-50 rounded-lg">
-                <p class="text-gray-700">No results found. Try a different search term.</p>
-            </div>
+            <div id="kbResults" class="tab-content active space-y-4"></div>
+            <div id="webResults" class="tab-content space-y-4"></div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('searchInput');
-            const searchButton = document.getElementById('searchButton');
-            const includeWebResults = document.getElementById('includeWebResults');
-            const initialMessage = document.getElementById('initialMessage');
-            const resultsContainer = document.getElementById('resultsContainer');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const noResults = document.getElementById('noResults');
-            const kbResults = document.getElementById('kbResults');
-            const webResults = document.getElementById('webResults');
-            const kbCount = document.getElementById('kbCount');
-            const webCount = document.getElementById('webCount');
-            
-            let knowledgeBase = null;
-            
-            // Set up tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    const tabName = this.getAttribute('data-tab');
-                    document.getElementById(tabName + 'Results').classList.add('active');
-                });
+        // Main elements
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const includeWebResults = document.getElementById('includeWebResults');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const initialMessage = document.getElementById('initialMessage');
+        const noResults = document.getElementById('noResults');
+        const tabsContainer = document.getElementById('tabsContainer');
+        const kbResults = document.getElementById('kbResults');
+        const webResults = document.getElementById('webResults');
+        const kbCount = document.getElementById('kbCount');
+        const webCount = document.getElementById('webCount');
+        
+        // Knowledge base data
+        let knowledgeBase = null;
+        
+        // Set up tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Deactivate all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Activate clicked tab
+                this.classList.add('active');
+                
+                // Hide all tab content
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Show corresponding content
+                const tabName = this.getAttribute('data-tab');
+                document.getElementById(tabName + 'Results').classList.add('active');
             });
-
-            // Load knowledge base
-            async function loadKnowledgeBase() {
-                try {
-                    const response = await fetch('https://raw.githubusercontent.com/Sladed49er/email-ai-knowledge-base/main/knowledge-base.json');
-                    knowledgeBase = await response.json();
-                    console.log('Knowledge base loaded:', knowledgeBase);
-                    
-                    // Check for URL query parameter
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const query = urlParams.get('q');
-                    if (query) {
-                        searchInput.value = query;
-                        performSearch();
-                    }
-                } catch (error) {
-                    console.error('Error loading knowledge base:', error);
-                    kbResults.innerHTML = `
-                        <div class="bg-red-100 text-red-700 p-4 rounded-lg">
-                            <p class="font-medium">Error loading knowledge base</p>
-                            <p>Please check your internet connection or try again later.</p>
-                        </div>
-                    `;
+        });
+        
+        // Load knowledge base
+        async function loadKnowledgeBase() {
+            try {
+                console.log('Loading knowledge base...');
+                const response = await fetch('https://raw.githubusercontent.com/Sladed49er/email-ai-knowledge-base/main/knowledge-base.json');
+                const data = await response.json();
+                knowledgeBase = data;
+                console.log('Knowledge base loaded:', knowledgeBase);
+                
+                // Check for URL query parameter
+                const params = new URLSearchParams(window.location.search);
+                const query = params.get('q');
+                if (query) {
+                    searchInput.value = query;
+                    performSearch();
                 }
+            } catch (error) {
+                console.error('Error loading knowledge base:', error);
+                kbResults.innerHTML = `
+                    <div class="bg-red-100 text-red-700 p-4 rounded-lg">
+                        <p class="font-bold">Error loading knowledge base</p>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Perform search
+        async function performSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            if (!query) return;
+            
+            // Update URL
+            history.replaceState(null, '', `?q=${encodeURIComponent(query)}`);
+            
+            // Show loading, hide other sections
+            loadingIndicator.classList.remove('hidden');
+            initialMessage.classList.add('hidden');
+            noResults.classList.add('hidden');
+            tabsContainer.classList.add('hidden');
+            kbResults.innerHTML = '';
+            webResults.innerHTML = '';
+            
+            // Perform searches
+            let kbSearchResults = [];
+            if (knowledgeBase && knowledgeBase.vendors) {
+                console.log('Searching knowledge base for:', query);
+                kbSearchResults = searchVendors(query);
             }
             
-            // Perform search
-            async function performSearch() {
-                const query = searchInput.value.trim();
-                if (!query) return;
+            let webSearchResults = [];
+            if (includeWebResults.checked) {
+                console.log('Generating web results for:', query);
+                webSearchResults = await generateWebResults(query);
+            }
+            
+            // Update result counts
+            kbCount.textContent = kbSearchResults.length;
+            webCount.textContent = webSearchResults.length;
+            
+            // Hide loading indicator
+            loadingIndicator.classList.add('hidden');
+            
+            // Display results or no results message
+            if (kbSearchResults.length > 0 || webSearchResults.length > 0) {
+                tabsContainer.classList.remove('hidden');
                 
-                // Update URL
-                history.replaceState(null, '', `?q=${encodeURIComponent(query)}`);
-                
-                // Show loading indicator
-                initialMessage.style.display = 'none';
-                resultsContainer.classList.add('hidden');
-                noResults.classList.add('hidden');
-                loadingIndicator.classList.remove('hidden');
-                
-                // Clear previous results
-                kbResults.innerHTML = '';
-                webResults.innerHTML = '';
-                
-                // Search knowledge base
-                const kbSearchResults = searchKnowledgeBase(query);
-                
-                // Generate web results if enabled
-                let webSearchResults = [];
-                if (includeWebResults.checked) {
-                    webSearchResults = await generateWebResults(query);
-                }
-                
-                // Update counts
-                kbCount.textContent = kbSearchResults.length;
-                webCount.textContent = webSearchResults.length;
-                
-                // Display results
+                // Display KB results
                 if (kbSearchResults.length > 0) {
-                    kbSearchResults.forEach(result => {
-                        displayKnowledgeBaseResult(result, query);
+                    kbSearchResults.forEach(item => {
+                        displayKBResult(item, query);
                     });
                 } else {
                     kbResults.innerHTML = `
-                        <div class="bg-gray-50 p-4 rounded-lg text-center">
-                            <p class="text-gray-700">No knowledge base results found for "${query}"</p>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <p class="text-gray-700">No knowledge base results for "${query}"</p>
                         </div>
                     `;
                 }
                 
+                // Display web results
                 if (webSearchResults.length > 0) {
-                    webSearchResults.forEach(result => {
-                        displayWebResult(result, query);
+                    webSearchResults.forEach(item => {
+                        displayWebResult(item, query);
                     });
                 } else {
                     webResults.innerHTML = `
-                        <div class="bg-gray-50 p-4 rounded-lg text-center">
-                            <p class="text-gray-700">No web results found for "${query}"</p>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <p class="text-gray-700">No web results for "${query}"</p>
                         </div>
                     `;
                 }
                 
-                // Hide loading indicator and show results
-                loadingIndicator.classList.add('hidden');
-                
-                if (kbSearchResults.length === 0 && webSearchResults.length === 0) {
-                    noResults.classList.remove('hidden');
-                } else {
-                    resultsContainer.classList.remove('hidden');
-                    
-                    // If no KB results but has web results, switch to web tab
-                    if (kbSearchResults.length === 0 && webSearchResults.length > 0) {
-                        document.querySelector('.tab[data-tab="web"]').click();
-                    }
+                // If no KB results but has web results, switch to web tab
+                if (kbSearchResults.length === 0 && webSearchResults.length > 0) {
+                    document.querySelector('.tab[data-tab="web"]').click();
                 }
+            } else {
+                noResults.classList.remove('hidden');
             }
+        }
+        
+        // Search through vendors
+        function searchVendors(query) {
+            const results = [];
             
-            // Search knowledge base for the specified query
-            function searchKnowledgeBase(query) {
-                if (!knowledgeBase || !knowledgeBase.vendors) return [];
-                
-                const results = [];
-                const seenItems = new Set();
-                const queryLower = query.toLowerCase();
-                
-                // Search through vendors array
-                knowledgeBase.vendors.forEach(vendor => {
-                    // Check if any part of the vendor object matches the query
-                    const vendorStr = JSON.stringify(vendor).toLowerCase();
-                    if (vendorStr.includes(queryLower)) {
-                        // Create a unique ID for this result to avoid duplicates
-                        const resultId = vendor.name || JSON.stringify(vendor).substring(0, 50);
-                        if (!seenItems.has(resultId)) {
-                            results.push(vendor);
-                            seenItems.add(resultId);
-                        }
-                    }
-                });
-                
+            // Debug log the knowledge base structure
+            console.log('Knowledge base structure:', knowledgeBase);
+            
+            // Make sure vendors array exists
+            if (!knowledgeBase || !knowledgeBase.vendors || !Array.isArray(knowledgeBase.vendors)) {
+                console.error('Knowledge base has no vendors array or is not in expected format');
                 return results;
             }
             
-            // Generate web search results for the specified query
-            async function generateWebResults(query) {
-                // This is a simulated web search
-                // In a real implementation, you would call a search API
+            // Search through each vendor
+            knowledgeBase.vendors.forEach(vendor => {
+                // Convert to string for searching
+                const vendorString = JSON.stringify(vendor).toLowerCase();
                 
-                const queryLower = query.toLowerCase();
-                const results = [];
-                
-                // Check for known vendors/technologies in query
-                const vendorKeywords = {
-                    'goto': 'GoTo',
-                    'microsoft': 'Microsoft',
-                    'ringcentral': 'RingCentral',
-                    '8x8': '8x8',
-                    'nextiva': 'Nextiva',
-                    'zoom': 'Zoom',
-                    'spectrum': 'Spectrum',
-                    'comcast': 'Comcast',
-                    'adobe': 'Adobe'
-                };
-                
-                let matchedVendor = null;
-                
-                // Look for vendor matches
-                for (const [keyword, vendorName] of Object.entries(vendorKeywords)) {
-                    if (queryLower.includes(keyword)) {
-                        matchedVendor = vendorName;
-                        break;
-                    }
+                // Check if vendor contains the query
+                if (vendorString.includes(query)) {
+                    results.push(vendor);
                 }
-                
-                // Generate vendor-specific results
-                if (matchedVendor) {
-                    results.push({
-                        title: `${matchedVendor} - Official Website`,
-                        url: `https://www.${matchedVendor.toLowerCase().replace(/\s+/g, '')}.com`,
-                        description: `Official website for ${matchedVendor}. Find products, services, support resources, and documentation.`
-                    });
-                    
-                    if (queryLower.includes('integration') || queryLower.includes('connect')) {
-                        results.push({
-                            title: `${matchedVendor} Integration Documentation`,
-                            url: `https://developer.${matchedVendor.toLowerCase().replace(/\s+/g, '')}.com`,
-                            description: `Learn how to integrate ${matchedVendor} with other systems and services. Find API documentation, tutorials, and examples.`
-                        });
-                    }
-                    
-                    if (queryLower.includes('cloud')) {
-                        results.push({
-                            title: `${matchedVendor} Cloud Services`,
-                            url: `https://www.${matchedVendor.toLowerCase().replace(/\s+/g, '')}.com/cloud`,
-                            description: `Explore ${matchedVendor}'s cloud offerings including infrastructure, platform, and software-as-a-service solutions.`
-                        });
-                    }
-                    
-                    results.push({
-                        title: `${matchedVendor} Reviews and Alternatives`,
-                        url: `https://www.g2.com/products/${matchedVendor.toLowerCase().replace(/\s+/g, '-')}/reviews`,
-                        description: `Read real user reviews of ${matchedVendor} and compare with alternative solutions. See pricing, features, and customer ratings.`
-                    });
+            });
+            
+            console.log(`Found ${results.length} results for "${query}"`);
+            return results;
+        }
+        
+        // Display a knowledge base result
+        function displayKBResult(vendor, query) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-md p-5 mb-4 result-card';
+            
+            // Determine file type and icon
+            let icon = 'fa-file';
+            let iconColor = 'text-blue-500';
+            
+            if (vendor.name) {
+                const ext = vendor.name.split('.').pop().toLowerCase();
+                if (ext === 'pdf') {
+                    icon = 'fa-file-pdf';
+                    iconColor = 'text-red-500';
+                } else if (['doc', 'docx'].includes(ext)) {
+                    icon = 'fa-file-word';
+                    iconColor = 'text-blue-600';
+                } else if (['xls', 'xlsx', 'csv'].includes(ext)) {
+                    icon = 'fa-file-excel';
+                    iconColor = 'text-green-600';
+                } else if (ext === 'txt') {
+                    icon = 'fa-file-alt';
+                    iconColor = 'text-gray-600';
                 }
-                
-                // For more generic topics
-                if (queryLower.includes('cloud')) {
-                    results.push({
-                        title: 'Top Cloud Service Providers for Businesses',
-                        url: 'https://www.gartner.com/reviews/market/cloud-infrastructure-and-platform-services',
-                        description: 'Compare the top cloud service providers including AWS, Microsoft Azure, Google Cloud, and more. Features, pricing, and expert analysis.'
-                    });
-                }
-                
-                if (queryLower.includes('voip') || queryLower.includes('phone')) {
-                    results.push({
-                        title: 'Best Business VoIP Providers of 2025',
-                        url: 'https://www.business.org/services/phone/best-business-voip-providers/',
-                        description: 'Compare the top VoIP phone systems for businesses. Find pricing, features, and the best option for your company size and needs.'
-                    });
-                }
-                
-                // If no specific results yet, add generic ones
-                if (results.length === 0) {
-                    results.push({
-                        title: `Search results for: ${query}`,
-                        url: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
-                        description: 'Find more information about this topic on Google.'
-                    });
-                    
-                    results.push({
-                        title: 'NetStar Knowledge Base',
-                        url: 'https://sladed49er.github.io/email-ai-knowledge-base/',
-                        description: 'Search our internal knowledge base for information about vendors, technologies, and services.'
-                    });
-                }
-                
-                // Limit to 5 results
-                return results.slice(0, 5);
             }
             
-            // Display a knowledge base result
-            function displayKnowledgeBaseResult(vendor, query) {
-                const card = document.createElement('div');
-                card.className = 'bg-white p-5 rounded-lg shadow-md result-card mb-4';
-                
-                // Determine document type and icon
-                let docType = 'default';
-                let docIcon = 'fa-file';
-                let docIconClass = '';
-                
-                if (vendor.name) {
-                    const fileExt = vendor.name.split('.').pop().toLowerCase();
-                    if (['doc', 'docx'].includes(fileExt)) {
-                        docType = 'word';
-                        docIcon = 'fa-file-word';
-                        docIconClass = 'icon-word';
-                    } else if (['xls', 'xlsx'].includes(fileExt)) {
-                        docType = 'excel';
-                        docIcon = 'fa-file-excel';
-                        docIconClass = 'icon-excel';
-                    } else if (fileExt === 'pdf') {
-                        docType = 'pdf';
-                        docIcon = 'fa-file-pdf';
-                        docIconClass = 'icon-pdf';
-                    } else if (fileExt === 'csv') {
-                        docType = 'csv';
-                        docIcon = 'fa-file-csv';
-                        docIconClass = 'icon-csv';
-                    } else if (fileExt === 'txt') {
-                        docType = 'txt';
-                        docIcon = 'fa-file-alt';
-                        docIconClass = 'icon-txt';
-                    }
-                }
-                
-                // Create card header
-                const title = vendor.name || 'Vendor Record';
-                
-                let html = `
-                    <div class="flex items-center mb-3">
-                        <i class="fas ${docIcon} text-2xl mr-2 ${docIconClass}"></i>
-                        <h3 class="text-xl font-semibold text-blue-700">${highlightText(title, query)}</h3>
+            // Create HTML for card
+            let html = `
+                <div class="flex items-start">
+                    <div class="mr-3 text-2xl ${iconColor}">
+                        <i class="fas ${icon}"></i>
                     </div>
-                    <div class="mb-4">
-                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
-                            Vendor
-                        </span>
-                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">
+                            ${highlightText(vendor.name || 'Vendor Document', query)}
+                        </h3>
+                        <div class="mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Vendor Document</span>
+                            ${vendor.source_file ? `<span class="text-sm text-gray-500 ml-2">Source: ${vendor.source_file}</span>` : ''}
+                        </div>
+                        
+                        <div class="space-y-3">
+            `;
+            
+            // Add properties table
+            html += '<table class="w-full border-collapse">';
+            
+            // Add each property
+            Object.entries(vendor).forEach(([key, value]) => {
+                // Skip name as it's already displayed in the title
+                if (key === 'name') return;
+                
+                const formattedKey = key.split('_').map(word => 
+                    word.charAt(0).toUpperCase() + word.slice(1)
+                ).join(' ');
+                
+                html += `
+                    <tr class="border-b border-gray-200">
+                        <td class="py-2 px-3 bg-gray-50 font-medium text-gray-700 w-1/3">${formattedKey}</td>
+                        <td class="py-2 px-3">${formatValue(value, query)}</td>
+                    </tr>
                 `;
-                
-                // Create property table
-                html += '<table class="property-table w-full">';
-                
-                // Add each property
-                Object.entries(vendor).forEach(([key, value]) => {
-                    // Skip name as it's already in the title
-                    if (key === 'name') return;
-                    
-                    html += `
-                        <tr>
-                            <td class="property-label">${formatKey(key)}</td>
-                            <td class="property-value">${formatPropertyValue(value, query)}</td>
-                        </tr>
-                    `;
-                });
-                
-                html += '</table>';
-                
-                card.innerHTML = html;
-                kbResults.appendChild(card);
-            }
+            });
             
-            // Display a web search result
-            function displayWebResult(result, query) {
-                const card = document.createElement('div');
-                card.className = 'bg-white p-5 rounded-lg shadow-md result-card mb-4';
-                
-                const html = `
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-globe text-2xl mr-2 icon-globe"></i>
-                        <h3 class="text-xl font-semibold text-blue-700">${highlightText(result.title, query)}</h3>
+            html += `
+                        </table>
                     </div>
-                    <div class="mb-3">
-                        <a href="${result.url}" class="text-green-700 hover:underline" target="_blank">
-                            ${result.url}
-                        </a>
-                    </div>
-                    <p class="text-gray-700">
-                        ${highlightText(result.description, query)}
-                    </p>
-                `;
-                
-                card.innerHTML = html;
-                webResults.appendChild(card);
+                </div>
+            `;
+            
+            card.innerHTML = html;
+            kbResults.appendChild(card);
+        }
+        
+        // Format a value for display
+        function formatValue(value, query) {
+            if (value === null || value === undefined) {
+                return '<span class="text-gray-400">None</span>';
             }
             
-            // Format a property value
-            function formatPropertyValue(value, query) {
-                if (value === null || value === undefined) {
-                    return '<span class="text-gray-400">None</span>';
-                }
-                
-                // Handle different value types
-                if (typeof value === 'string') {
-                    // Try to parse JSON strings
-                    if ((value.startsWith('{') && value.endsWith('}')) || 
-                        (value.startsWith('[') && value.endsWith(']'))) {
-                        try {
-                            // Replace single quotes with double quotes for JSON parsing
-                            const jsonStr = value.replace(/'/g, '"');
-                            const parsedValue = JSON.parse(jsonStr);
-                            
-                            if (Array.isArray(parsedValue)) {
-                                return formatArray(parsedValue, query);
-                            } else if (typeof parsedValue === 'object') {
-                                return formatObject(parsedValue, query);
-                            }
-                        } catch (e) {
-                            // If parsing fails, just highlight the text
-                            console.log('Failed to parse:', value);
-                            return highlightText(value, query);
-                        }
-                    }
-                    
-                    // Check if it's a URL
-                    if (value.match(/^https?:\/\//)) {
-                        return `<a href="${value}" class="text-blue-600 hover:underline" target="_blank">${highlightText(value, query)}</a>`;
-                    }
-                    
-                    // Regular string
-                    return highlightText(value, query);
-                } else if (Array.isArray(value)) {
-                    return formatArray(value, query);
-                } else if (typeof value === 'object' && value !== null) {
-                    return formatObject(value, query);
-                } else {
-                    // Numbers, booleans, etc.
-                    return highlightText(String(value), query);
-                }
-            }
-            
-            // Format an array
-            function formatArray(arr, query) {
-                if (arr.length === 0) {
+            // Handle arrays
+            if (Array.isArray(value)) {
+                if (value.length === 0) {
                     return '<span class="text-gray-400">Empty list</span>';
                 }
                 
                 let html = '<ul class="list-disc pl-5 space-y-1">';
-                
-                arr.forEach(item => {
-                    if (typeof item === 'object' && item !== null) {
-                        html += `<li>${formatObject(item, query)}</li>`;
-                    } else {
-                        html += `<li>${highlightText(String(item), query)}</li>`;
-                    }
+                value.forEach(item => {
+                    html += `<li>${highlightText(item.toString(), query)}</li>`;
                 });
-                
                 html += '</ul>';
                 return html;
             }
             
-            // Format an object
-            function formatObject(obj, query) {
+            // Handle objects
+            if (typeof value === 'object') {
                 let html = '<div class="pl-3 border-l-2 border-gray-200 space-y-1">';
-                
-                Object.entries(obj).forEach(([key, value]) => {
-                    html += `<div><span class="font-medium">${formatKey(key)}:</span> `;
+                Object.entries(value).forEach(([k, v]) => {
+                    const formattedKey = k.split('_').map(word => 
+                        word.charAt(0).toUpperCase() + word.slice(1)
+                    ).join(' ');
                     
-                    if (typeof value === 'object' && value !== null) {
-                        if (Array.isArray(value)) {
-                            html += formatArray(value, query);
-                        } else {
-                            html += formatObject(value, query);
-                        }
-                    } else {
-                        html += highlightText(String(value), query);
-                    }
-                    
-                    html += '</div>';
+                    html += `<div><span class="font-medium">${formattedKey}:</span> ${
+                        typeof v === 'object' ? JSON.stringify(v) : highlightText(v.toString(), query)
+                    }</div>`;
                 });
-                
                 html += '</div>';
                 return html;
             }
             
-            // Format a key
-            function formatKey(key) {
-                return key.split(/[_\s]/).map(word => 
-                    word.charAt(0).toUpperCase() + word.slice(1)
-                ).join(' ');
+            // Handle strings that look like JSON
+            if (typeof value === 'string' && 
+                ((value.startsWith('{') && value.endsWith('}')) || 
+                 (value.startsWith('[') && value.endsWith(']')))) {
+                try {
+                    // Try to parse as JSON
+                    const jsonValue = JSON.parse(value.replace(/'/g, '"'));
+                    
+                    if (Array.isArray(jsonValue)) {
+                        // Format as list
+                        if (jsonValue.length === 0) {
+                            return '<span class="text-gray-400">Empty list</span>';
+                        }
+                        
+                        let html = '<ul class="list-disc pl-5 space-y-1">';
+                        jsonValue.forEach(item => {
+                            html += `<li>${highlightText(item.toString(), query)}</li>`;
+                        });
+                        html += '</ul>';
+                        return html;
+                    } else {
+                        // Format as object
+                        let html = '<div class="pl-3 border-l-2 border-gray-200 space-y-1">';
+                        Object.entries(jsonValue).forEach(([k, v]) => {
+                            const formattedKey = k.split('_').map(word => 
+                                word.charAt(0).toUpperCase() + word.slice(1)
+                            ).join(' ');
+                            
+                            html += `<div><span class="font-medium">${formattedKey}:</span> ${
+                                typeof v === 'object' ? JSON.stringify(v) : highlightText(v.toString(), query)
+                            }</div>`;
+                        });
+                        html += '</div>';
+                        return html;
+                    }
+                } catch (e) {
+                    // If JSON parsing fails, treat as normal string
+                    console.log('Failed to parse as JSON:', value);
+                }
             }
             
-            // Highlight matching text
-            function highlightText(text, query) {
-                if (!text || !query) return text;
-                
-                const words = query.toLowerCase().split(/\s+/).filter(word => word.length > 2);
-                let result = text;
-                
-                words.forEach(word => {
-                    const regex = new RegExp('(' + escapeRegExp(word) + ')', 'gi');
-                    result = result.replace(regex, '<span class="highlight">$1</span>');
+            // Default: handle as string
+            return highlightText(value.toString(), query);
+        }
+        
+        // Generate web search results
+        async function generateWebResults(query) {
+            // This is a simulated web search - in a real app, you would call a search API
+            
+            // Check for specific vendor/technology names
+            const vendorKeywords = {
+                'goto': 'GoTo',
+                'microsoft': 'Microsoft',
+                '8x8': '8x8',
+                'ringcentral': 'RingCentral',
+                'zoom': 'Zoom',
+                'nextiva': 'Nextiva',
+                'adobe': 'Adobe'
+            };
+            
+            const results = [];
+            let matchedVendor = null;
+            
+            // Check if query contains a vendor name
+            for (const [keyword, name] of Object.entries(vendorKeywords)) {
+                if (query.includes(keyword)) {
+                    matchedVendor = name;
+                    break;
+                }
+            }
+            
+            // Add vendor-specific results
+            if (matchedVendor) {
+                results.push({
+                    title: `${matchedVendor} - Official Website`,
+                    url: `https://www.${matchedVendor.toLowerCase().replace(/\s+/g, '')}.com`,
+                    description: `Official website for ${matchedVendor}. Find products, services, support resources, and documentation.`
                 });
                 
-                return result;
+                // For integration-related searches
+                if (query.includes('integration') || query.includes('connect')) {
+                    results.push({
+                        title: `${matchedVendor} Integration Guide`,
+                        url: `https://developer.${matchedVendor.toLowerCase().replace(/\s+/g, '')}.com/integrations`,
+                        description: `Comprehensive guide to integrating with ${matchedVendor}. API documentation, tutorials, and code examples.`
+                    });
+                }
             }
             
-            // Escape special regex characters
-            function escapeRegExp(string) {
-                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            // For cloud-related searches
+            if (query.includes('cloud')) {
+                results.push({
+                    title: 'Top Cloud Service Providers in 2025',
+                    url: 'https://www.techradar.com/best/best-cloud-providers',
+                    description: 'Our guide to the best cloud providers for business, featuring AWS, Microsoft Azure, Google Cloud Platform, and more.'
+                });
+                
+                results.push({
+                    title: 'Gartner Magic Quadrant for Cloud Infrastructure',
+                    url: 'https://www.gartner.com/doc/reprints?id=1-27BUUJBA&ct=220727',
+                    description: "Gartner's analysis of cloud infrastructure and platform service providers, highlighting leaders, challengers, visionaries, and niche players."
+                });
             }
             
-            // Event listeners
-            searchButton.addEventListener('click', performSearch);
-            searchInput.addEventListener('keydown', e => {
-                if (e.key === 'Enter') performSearch();
+            // For VoIP-related searches
+            if (query.includes('voip') || query.includes('phone')) {
+                results.push({
+                    title: 'Best Business VoIP Providers of 2025',
+                    url: 'https://www.business.org/services/phone/best-business-voip-providers/',
+                    description: 'Compare the top VoIP phone systems for businesses. Find pricing, features, and the best option for your company size and needs.'
+                });
+            }
+            
+            // Add a generic result if none specific
+            if (results.length === 0) {
+                results.push({
+                    title: `Search results for: ${query}`,
+                    url: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+                    description: 'Find more information about this topic on Google.'
+                });
+            }
+            
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            return results;
+        }
+        
+        // Display a web search result
+        function displayWebResult(result, query) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-lg shadow-md p-5 mb-4 result-card';
+            
+            card.innerHTML = `
+                <div class="flex items-start">
+                    <div class="mr-3 text-2xl text-blue-500">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-blue-700 mb-1">
+                            ${highlightText(result.title, query)}
+                        </h3>
+                        <a href="${result.url}" target="_blank" class="text-green-600 text-sm hover:underline block mb-2">
+                            ${result.url}
+                        </a>
+                        <p class="text-gray-700">
+                            ${highlightText(result.description, query)}
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            webResults.appendChild(card);
+        }
+        
+        // Highlight text matching the search query
+        function highlightText(text, query) {
+            if (!text || !query) return text;
+            
+            // Split query into words
+            const words = query.split(/\s+/).filter(word => word.length > 2);
+            let result = text;
+            
+            // Highlight each word
+            words.forEach(word => {
+                const regex = new RegExp('(' + escapeRegex(word) + ')', 'gi');
+                result = result.replace(regex, '<span class="highlight">$1</span>');
             });
             
-            // Initial load
-            loadKnowledgeBase();
-            searchInput.focus();
+            return result;
+        }
+        
+        // Escape special regex characters
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+        
+        // Set up event listeners
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keydown', event => {
+            if (event.key === 'Enter') performSearch();
         });
+        
+        // Load knowledge base when page loads
+        document.addEventListener('DOMContentLoaded', loadKnowledgeBase);
     </script>
 </body>
 </html>
