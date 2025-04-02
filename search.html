@@ -41,7 +41,6 @@
         }
         .icon {
             margin-right: 8px;
-            color: #3b82f6;
         }
         .icon-word {
             color: #2b579a;
@@ -54,6 +53,9 @@
         }
         .icon-csv {
             color: #27ae60;
+        }
+        .icon-txt {
+            color: #3498db;
         }
         .icon-globe {
             color: #3498db;
@@ -89,14 +91,14 @@
 
         <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
             <div class="flex flex-col md:flex-row gap-2">
-                <input type="text" id="searchInput" placeholder="Ask a question or search by keyword..." 
+                <input type="text" id="searchInput" placeholder="Search for vendors, technologies, or documents..." 
                        class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <button id="searchButton" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
                     Search
                 </button>
             </div>
             <div class="mt-2 text-sm text-gray-500">
-                Try asking: "What integrations does GoTo provide?" or "Which vendors offer cloud services?"
+                Try searching for: "GoTo", "cloud", "integrations", "docx", etc.
             </div>
             <div class="mt-3">
                 <label class="inline-flex items-center">
@@ -108,7 +110,7 @@
 
         <div id="searchResults" class="max-w-4xl mx-auto">
             <div id="initialMessage" class="text-center text-gray-500 py-8">
-                Enter a search term or ask a question to find information from your knowledge base
+                Enter a search term to find information from your knowledge base
             </div>
             
             <div id="resultsContainer" class="hidden">
@@ -162,7 +164,7 @@
                     document.getElementById(tabName + 'Results').classList.add('active');
                 });
             });
-            
+
             // Load knowledge base
             async function loadKnowledgeBase() {
                 try {
@@ -222,7 +224,7 @@
                 // Display results
                 if (kbSearchResults.length > 0) {
                     kbSearchResults.forEach(result => {
-                        displayKnowledgeBaseResult(result.item, result.category, query);
+                        displayKnowledgeBaseResult(result, query);
                     });
                 } else {
                     kbResults.innerHTML = `
@@ -259,33 +261,24 @@
                 }
             }
             
-            // Search knowledge base
+            // Search knowledge base for the specified query
             function searchKnowledgeBase(query) {
-                if (!knowledgeBase) return [];
+                if (!knowledgeBase || !knowledgeBase.vendors) return [];
                 
                 const results = [];
                 const seenItems = new Set();
                 const queryLower = query.toLowerCase();
                 
-                // Search through all categories
-                Object.entries(knowledgeBase).forEach(([category, items]) => {
-                    if (Array.isArray(items)) {
-                        items.forEach(item => {
-                            const itemStr = JSON.stringify(item).toLowerCase();
-                            const itemKey = `${category}-${JSON.stringify(item)}`;
-                            
-                            if (itemStr.includes(queryLower) && !seenItems.has(itemKey)) {
-                                results.push({ item, category });
-                                seenItems.add(itemKey);
-                            }
-                        });
-                    } else if (typeof items === 'object') {
-                        const itemStr = JSON.stringify(items).toLowerCase();
-                        const itemKey = `${category}-${JSON.stringify(items)}`;
-                        
-                        if (itemStr.includes(queryLower) && !seenItems.has(itemKey)) {
-                            results.push({ item: items, category });
-                            seenItems.add(itemKey);
+                // Search through vendors array
+                knowledgeBase.vendors.forEach(vendor => {
+                    // Check if any part of the vendor object matches the query
+                    const vendorStr = JSON.stringify(vendor).toLowerCase();
+                    if (vendorStr.includes(queryLower)) {
+                        // Create a unique ID for this result to avoid duplicates
+                        const resultId = vendor.name || JSON.stringify(vendor).substring(0, 50);
+                        if (!seenItems.has(resultId)) {
+                            results.push(vendor);
+                            seenItems.add(resultId);
                         }
                     }
                 });
@@ -293,7 +286,7 @@
                 return results;
             }
             
-            // Generate web search results
+            // Generate web search results for the specified query
             async function generateWebResults(query) {
                 // This is a simulated web search
                 // In a real implementation, you would call a search API
@@ -301,55 +294,74 @@
                 const queryLower = query.toLowerCase();
                 const results = [];
                 
-                // Check for vendors in query
-                const vendors = ['microsoft', 'aws', 'amazon', 'cisco', 'goto', 'nextive'];
-                let vendorName = null;
+                // Check for known vendors/technologies in query
+                const vendorKeywords = {
+                    'goto': 'GoTo',
+                    'microsoft': 'Microsoft',
+                    'ringcentral': 'RingCentral',
+                    '8x8': '8x8',
+                    'nextiva': 'Nextiva',
+                    'zoom': 'Zoom',
+                    'spectrum': 'Spectrum',
+                    'comcast': 'Comcast',
+                    'adobe': 'Adobe'
+                };
                 
-                for (const vendor of vendors) {
-                    if (queryLower.includes(vendor)) {
-                        vendorName = vendor.charAt(0).toUpperCase() + vendor.slice(1);
-                        if (vendor === 'aws') vendorName = 'AWS';
+                let matchedVendor = null;
+                
+                // Look for vendor matches
+                for (const [keyword, vendorName] of Object.entries(vendorKeywords)) {
+                    if (queryLower.includes(keyword)) {
+                        matchedVendor = vendorName;
                         break;
                     }
                 }
                 
                 // Generate vendor-specific results
-                if (vendorName) {
+                if (matchedVendor) {
                     results.push({
-                        title: `${vendorName} - Official Website`,
-                        url: `https://www.${vendorName.toLowerCase() === 'aws' ? 'aws.amazon' : vendorName.toLowerCase()}.com`,
-                        description: `Official website for ${vendorName}. Find products, services, support resources, and documentation.`
+                        title: `${matchedVendor} - Official Website`,
+                        url: `https://www.${matchedVendor.toLowerCase().replace(/\s+/g, '')}.com`,
+                        description: `Official website for ${matchedVendor}. Find products, services, support resources, and documentation.`
                     });
                     
                     if (queryLower.includes('integration') || queryLower.includes('connect')) {
                         results.push({
-                            title: `${vendorName} Integration Documentation`,
-                            url: `https://docs.${vendorName.toLowerCase() === 'aws' ? 'aws.amazon' : vendorName.toLowerCase()}.com/integrations`,
-                            description: `Learn how to integrate ${vendorName} with other systems and services. Find API documentation, tutorials, and examples.`
+                            title: `${matchedVendor} Integration Documentation`,
+                            url: `https://developer.${matchedVendor.toLowerCase().replace(/\s+/g, '')}.com`,
+                            description: `Learn how to integrate ${matchedVendor} with other systems and services. Find API documentation, tutorials, and examples.`
                         });
                     }
                     
                     if (queryLower.includes('cloud')) {
                         results.push({
-                            title: `${vendorName} Cloud Services`,
-                            url: `https://www.${vendorName.toLowerCase() === 'aws' ? 'aws.amazon' : vendorName.toLowerCase()}.com/cloud`,
-                            description: `Explore ${vendorName}'s cloud offerings including infrastructure, platform, and software-as-a-service solutions.`
+                            title: `${matchedVendor} Cloud Services`,
+                            url: `https://www.${matchedVendor.toLowerCase().replace(/\s+/g, '')}.com/cloud`,
+                            description: `Explore ${matchedVendor}'s cloud offerings including infrastructure, platform, and software-as-a-service solutions.`
                         });
                     }
-                }
-                
-                // For cloud vendor searches
-                if (queryLower.includes('cloud') && (queryLower.includes('vendor') || queryLower.includes('provider'))) {
-                    results.push({
-                        title: 'Top Cloud Service Providers in 2025',
-                        url: 'https://www.techradar.com/best/best-cloud-providers',
-                        description: 'Our guide to the best cloud service providers for business, featuring AWS, Microsoft Azure, Google Cloud Platform, and more.'
-                    });
                     
                     results.push({
-                        title: 'Gartner Magic Quadrant for Cloud Infrastructure',
-                        url: 'https://www.gartner.com/doc/reprints?id=1-27BUUJBA&ct=220727',
-                        description: 'Gartner\'s analysis of cloud infrastructure and platform service providers, highlighting leaders, challengers, visionaries, and niche players.'
+                        title: `${matchedVendor} Reviews and Alternatives`,
+                        url: `https://www.g2.com/products/${matchedVendor.toLowerCase().replace(/\s+/g, '-')}/reviews`,
+                        description: `Read real user reviews of ${matchedVendor} and compare with alternative solutions. See pricing, features, and customer ratings.`
+                    });
+                }
+                
+                // For more generic topics
+                if (queryLower.includes('cloud')) {
+                    results.push({
+                        title: 'Top Cloud Service Providers for Businesses',
+                        url: 'https://www.gartner.com/reviews/market/cloud-infrastructure-and-platform-services',
+                        description: 'Compare the top cloud service providers including AWS, Microsoft Azure, Google Cloud, and more. Features, pricing, and expert analysis.'
+                    });
+                }
+                
+                if (queryLower.includes('voip') || queryLower.includes('phone')) {
+                    results.push({
+                        title: 'Best Business VoIP Providers of 2025',
+                        url: 'https://www.business.org/services/phone/best-business-voip-providers/',
+                        description: 'Compare the top VoIP phone systems for businesses. Find pricing, features, and the best option for your company size and needs.'
                     });
                 }
                 
@@ -360,26 +372,30 @@
                         url: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
                         description: 'Find more information about this topic on Google.'
                     });
+                    
+                    results.push({
+                        title: 'NetStar Knowledge Base',
+                        url: 'https://sladed49er.github.io/email-ai-knowledge-base/',
+                        description: 'Search our internal knowledge base for information about vendors, technologies, and services.'
+                    });
                 }
                 
-                // Simulate network delay
-                await new Promise(resolve => setTimeout(resolve, 300));
-                
-                return results;
+                // Limit to 5 results
+                return results.slice(0, 5);
             }
             
             // Display a knowledge base result
-            function displayKnowledgeBaseResult(item, category, query) {
+            function displayKnowledgeBaseResult(vendor, query) {
                 const card = document.createElement('div');
-                card.className = 'bg-white p-5 rounded-lg shadow-md result-card';
+                card.className = 'bg-white p-5 rounded-lg shadow-md result-card mb-4';
                 
                 // Determine document type and icon
                 let docType = 'default';
                 let docIcon = 'fa-file';
                 let docIconClass = '';
                 
-                if (item.name) {
-                    const fileExt = item.name.split('.').pop().toLowerCase();
+                if (vendor.name) {
+                    const fileExt = vendor.name.split('.').pop().toLowerCase();
                     if (['doc', 'docx'].includes(fileExt)) {
                         docType = 'word';
                         docIcon = 'fa-file-word';
@@ -396,11 +412,15 @@
                         docType = 'csv';
                         docIcon = 'fa-file-csv';
                         docIconClass = 'icon-csv';
+                    } else if (fileExt === 'txt') {
+                        docType = 'txt';
+                        docIcon = 'fa-file-alt';
+                        docIconClass = 'icon-txt';
                     }
                 }
                 
                 // Create card header
-                const title = item.name || category;
+                const title = vendor.name || 'Vendor Record';
                 
                 let html = `
                     <div class="flex items-center mb-3">
@@ -409,16 +429,16 @@
                     </div>
                     <div class="mb-4">
                         <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
-                            Category: ${formatKey(category)}
+                            Vendor
                         </span>
                     </div>
                 `;
                 
                 // Create property table
-                html += '<table class="property-table">';
+                html += '<table class="property-table w-full">';
                 
                 // Add each property
-                Object.entries(item).forEach(([key, value]) => {
+                Object.entries(vendor).forEach(([key, value]) => {
                     // Skip name as it's already in the title
                     if (key === 'name') return;
                     
@@ -439,7 +459,7 @@
             // Display a web search result
             function displayWebResult(result, query) {
                 const card = document.createElement('div');
-                card.className = 'bg-white p-5 rounded-lg shadow-md result-card';
+                card.className = 'bg-white p-5 rounded-lg shadow-md result-card mb-4';
                 
                 const html = `
                     <div class="flex items-center mb-2">
@@ -484,6 +504,7 @@
                         } catch (e) {
                             // If parsing fails, just highlight the text
                             console.log('Failed to parse:', value);
+                            return highlightText(value, query);
                         }
                     }
                     
@@ -496,7 +517,7 @@
                     return highlightText(value, query);
                 } else if (Array.isArray(value)) {
                     return formatArray(value, query);
-                } else if (typeof value === 'object') {
+                } else if (typeof value === 'object' && value !== null) {
                     return formatObject(value, query);
                 } else {
                     // Numbers, booleans, etc.
@@ -513,7 +534,7 @@
                 let html = '<ul class="list-disc pl-5 space-y-1">';
                 
                 arr.forEach(item => {
-                    if (typeof item === 'object') {
+                    if (typeof item === 'object' && item !== null) {
                         html += `<li>${formatObject(item, query)}</li>`;
                     } else {
                         html += `<li>${highlightText(String(item), query)}</li>`;
@@ -563,7 +584,7 @@
                 let result = text;
                 
                 words.forEach(word => {
-                    const regex = new RegExp('\\b(' + escapeRegExp(word) + ')\\b', 'gi');
+                    const regex = new RegExp('(' + escapeRegExp(word) + ')', 'gi');
                     result = result.replace(regex, '<span class="highlight">$1</span>');
                 });
                 
