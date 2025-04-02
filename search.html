@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matt Slade - Knowledge Base Search</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .highlight {
+            background-color: #ffffcc;
+            padding: 0 2px;
+        }
+        .result-card {
+            transition: transform 0.2s;
+        }
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-blue-800">Knowledge Base Search</h1>
+            <p class="text-lg text-gray-600 mt-2">NetStar Inc. - Vendor & Technology Information</p>
+        </header>
+
+        <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-2">
+                <input type="text" id="searchInput" placeholder="Search vendors, technologies, services..." 
+                       class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button id="searchButton" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
+                    Search
+                </button>
+            </div>
+            <div class="mt-2 text-sm text-gray-500">
+                Try searching for: cloud, security, VoIP, Microsoft, AWS, etc.
+            </div>
+        </div>
+
+        <div id="resultsContainer" class="max-w-4xl mx-auto">
+            <!-- Search results will appear here -->
+            <div id="initialMessage" class="text-center text-gray-500 py-8">
+                Enter a search term to find information from your knowledge base
+            </div>
+            <div id="searchResults" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const searchResults = document.getElementById('searchResults');
+            const initialMessage = document.getElementById('initialMessage');
+            let knowledgeBase = null;
+
+            // Fetch the knowledge base
+            fetch('https://raw.githubusercontent.com/Sladed49er/email-ai-knowledge-base/main/knowledge-base.json')
+                .then(response => response.json())
+                .then(data => {
+                    knowledgeBase = data;
+                    console.log('Knowledge base loaded:', knowledgeBase);
+                })
+                .catch(error => {
+                    console.error('Error loading knowledge base:', error);
+                    searchResults.innerHTML = `
+                        <div class="bg-red-100 text-red-700 p-4 rounded-md">
+                            <p class="font-medium">Error loading knowledge base</p>
+                            <p>Please check your internet connection or repository URL.</p>
+                        </div>
+                    `;
+                });
+
+            // Search function
+            function performSearch() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                
+                if (!searchTerm) {
+                    initialMessage.style.display = 'block';
+                    searchResults.innerHTML = '';
+                    return;
+                }
+
+                if (!knowledgeBase) {
+                    searchResults.innerHTML = `
+                        <div class="bg-yellow-100 text-yellow-700 p-4 rounded-md">
+                            <p>Knowledge base is still loading. Please try again in a moment.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                initialMessage.style.display = 'none';
+                searchResults.innerHTML = '';
+                let resultsFound = false;
+
+                // Search through each category in the knowledge base
+                Object.entries(knowledgeBase).forEach(([category, items]) => {
+                    if (Array.isArray(items)) {
+                        // For array-based categories (like vendors, technologies)
+                        items.forEach(item => {
+                            const itemString = JSON.stringify(item).toLowerCase();
+                            if (itemString.includes(searchTerm)) {
+                                resultsFound = true;
+                                displayResult(item, category, searchTerm);
+                            }
+                        });
+                    } else if (typeof items === 'object') {
+                        // For object-based categories
+                        const itemString = JSON.stringify(items).toLowerCase();
+                        if (itemString.includes(searchTerm)) {
+                            resultsFound = true;
+                            displayResult(items, category, searchTerm);
+                        }
+                    }
+                });
+
+                if (!resultsFound) {
+                    searchResults.innerHTML = `
+                        <div class="bg-gray-100 p-4 rounded-md text-center">
+                            <p class="text-gray-700">No results found for "${searchTerm}"</p>
+                            <p class="text-gray-500 text-sm mt-1">Try a different search term or check spelling</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Display a search result
+            function displayResult(item, category, searchTerm) {
+                const resultCard = document.createElement('div');
+                resultCard.className = 'bg-white p-5 rounded-lg shadow-md result-card';
+
+                // Create a title based on item properties
+                let title = item.name || item.vendor || item.technology || item.service || category;
+                
+                // Build the content HTML
+                let contentHTML = `<h3 class="text-xl font-semibold text-blue-700 mb-2">${title}</h3>`;
+                
+                // Add category badge
+                contentHTML += `<span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mb-3">Category: ${category}</span>`;
+                
+                // Process each property in the item
+                contentHTML += '<div class="space-y-2">';
+                Object.entries(item).forEach(([key, value]) => {
+                    if (key !== 'name' && key !== 'vendor' && key !== 'technology' && key !== 'service') {
+                        const valueStr = typeof value === 'object' ? JSON.stringify(value) : value.toString();
+                        const highlightedValue = highlightSearchTerm(valueStr, searchTerm);
+                        contentHTML += `<p><span class="font-medium text-gray-700">${formatKey(key)}:</span> ${highlightedValue}</p>`;
+                    }
+                });
+                contentHTML += '</div>';
+                
+                resultCard.innerHTML = contentHTML;
+                searchResults.appendChild(resultCard);
+            }
+
+            // Format property keys for better display
+            function formatKey(key) {
+                return key.split('_').map(word => 
+                    word.charAt(0).toUpperCase() + word.slice(1)
+                ).join(' ');
+            }
+
+            // Highlight search term in result text
+            function highlightSearchTerm(text, searchTerm) {
+                if (!searchTerm) return text;
+                
+                // Simple version for strings
+                if (typeof text === 'string') {
+                    const regex = new RegExp(searchTerm, 'gi');
+                    return text.replace(regex, match => `<span class="highlight">${match}</span>`);
+                }
+                return text;
+            }
+
+            // Event listeners
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            // Auto-focus the search input
+            searchInput.focus();
+        });
+    </script>
+</body>
+</html>
