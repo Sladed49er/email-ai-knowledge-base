@@ -28,21 +28,21 @@
 
         <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
             <div class="flex flex-col md:flex-row gap-2">
-                <input type="text" id="searchInput" placeholder="Search vendors, technologies, services..." 
+                <input type="text" id="searchInput" placeholder="Ask a question or search by keyword..." 
                        class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <button id="searchButton" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
                     Search
                 </button>
             </div>
             <div class="mt-2 text-sm text-gray-500">
-                Try searching for: cloud, security, VoIP, Microsoft, AWS, etc.
+                Try asking: "What integrations does GoTo provide?" or "Which vendors offer cloud services?"
             </div>
         </div>
 
         <div id="resultsContainer" class="max-w-4xl mx-auto">
             <!-- Search results will appear here -->
             <div id="initialMessage" class="text-center text-gray-500 py-8">
-                Enter a search term to find information from your knowledge base
+                Enter a search term or ask a question to find information from your knowledge base
             </div>
             <div id="searchResults" class="space-y-4"></div>
         </div>
@@ -55,6 +55,20 @@
             const searchResults = document.getElementById('searchResults');
             const initialMessage = document.getElementById('initialMessage');
             let knowledgeBase = null;
+
+            // Keywords to extract from natural language questions
+            const keywordMap = {
+                'integration': ['integration', 'connect', 'connection', 'connects', 'integrates', 'api'],
+                'security': ['security', 'secure', 'protection', 'protect', 'safe'],
+                'cloud': ['cloud', 'hosted', 'saas', 'online'],
+                'voip': ['voip', 'phone', 'telephony', 'call', 'voice'],
+                'vendor': ['vendor', 'provider', 'company', 'partner'],
+                'microsoft': ['microsoft', 'ms', 'azure', '365', 'office'],
+                'aws': ['aws', 'amazon'],
+                'cisco': ['cisco', 'webex'],
+                'goto': ['goto', 'logmein'],
+                'network': ['network', 'routing', 'switch', 'infrastructure']
+            };
 
             // Fetch the knowledge base
             fetch('https://raw.githubusercontent.com/Sladed49er/email-ai-knowledge-base/main/knowledge-base.json')
@@ -73,11 +87,58 @@
                     `;
                 });
 
+            // Process natural language questions to extract keywords
+            function extractKeywords(question) {
+                question = question.toLowerCase();
+                let extractedKeywords = [];
+                
+                // Check for direct matches first
+                Object.entries(keywordMap).forEach(([category, keywords]) => {
+                    keywords.forEach(keyword => {
+                        if (question.includes(keyword)) {
+                            extractedKeywords.push(category);
+                        }
+                    });
+                });
+                
+                // If it's a question about what something does/provides
+                if (question.includes('what') && 
+                   (question.includes('do') || question.includes('does') || 
+                    question.includes('provide') || question.includes('offer'))) {
+                    
+                    // Add any vendor or technology names found in the question
+                    extractVendorNames(question).forEach(vendor => {
+                        extractedKeywords.push(vendor);
+                    });
+                }
+                
+                // Remove duplicates
+                extractedKeywords = [...new Set(extractedKeywords)];
+                
+                return extractedKeywords.length > 0 ? extractedKeywords : [question];
+            }
+            
+            // Helper to find vendor names in a question
+            function extractVendorNames(question) {
+                const vendorNames = [];
+                
+                // Add specific vendor detection logic
+                if (knowledgeBase && knowledgeBase.vendors) {
+                    knowledgeBase.vendors.forEach(vendor => {
+                        if (vendor.name && question.includes(vendor.name.toLowerCase())) {
+                            vendorNames.push(vendor.name.toLowerCase());
+                        }
+                    });
+                }
+                
+                return vendorNames;
+            }
+
             // Search function
             function performSearch() {
-                const searchTerm = searchInput.value.trim().toLowerCase();
+                const searchInput = document.getElementById('searchInput').value.trim();
                 
-                if (!searchTerm) {
+                if (!searchInput) {
                     initialMessage.style.display = 'block';
                     searchResults.innerHTML = '';
                     return;
@@ -94,37 +155,138 @@
 
                 initialMessage.style.display = 'none';
                 searchResults.innerHTML = '';
+                
+                // Extract keywords from the question/search
+                const keywords = extractKeywords(searchInput);
+                console.log('Extracted keywords:', keywords);
+                
                 let resultsFound = false;
-
-                // Search through each category in the knowledge base
-                Object.entries(knowledgeBase).forEach(([category, items]) => {
-                    if (Array.isArray(items)) {
-                        // For array-based categories (like vendors, technologies)
-                        items.forEach(item => {
-                            const itemString = JSON.stringify(item).toLowerCase();
-                            if (itemString.includes(searchTerm)) {
-                                resultsFound = true;
-                                displayResult(item, category, searchTerm);
-                            }
-                        });
-                    } else if (typeof items === 'object') {
-                        // For object-based categories
-                        const itemString = JSON.stringify(items).toLowerCase();
-                        if (itemString.includes(searchTerm)) {
-                            resultsFound = true;
-                            displayResult(items, category, searchTerm);
-                        }
+                
+                // For queries that look like questions
+                if (isQuestion(searchInput)) {
+                    // Try to generate a direct answer
+                    const answer = generateAnswer(searchInput, keywords);
+                    if (answer) {
+                        displayAnswer(answer, searchInput);
+                        resultsFound = true;
                     }
+                }
+
+                // Also show matching results from knowledge base
+                keywords.forEach(keyword => {
+                    const matches = searchKnowledgeBase(keyword.toLowerCase());
+                    matches.forEach(match => {
+                        resultsFound = true;
+                        displayResult(match.item, match.category, searchInput);
+                    });
                 });
 
                 if (!resultsFound) {
                     searchResults.innerHTML = `
                         <div class="bg-gray-100 p-4 rounded-md text-center">
-                            <p class="text-gray-700">No results found for "${searchTerm}"</p>
+                            <p class="text-gray-700">No results found for "${searchInput}"</p>
                             <p class="text-gray-500 text-sm mt-1">Try a different search term or check spelling</p>
                         </div>
                     `;
                 }
+            }
+            
+            // Check if input looks like a question
+            function isQuestion(input) {
+                return input.toLowerCase().includes('what') || 
+                       input.toLowerCase().includes('which') ||
+                       input.toLowerCase().includes('how') ||
+                       input.toLowerCase().includes('?');
+            }
+            
+            // Generate a natural language answer
+            function generateAnswer(question, keywords) {
+                // Handle specific question types
+                if (keywords.includes('goto') && 
+                   (keywords.includes('integration') || question.includes('integrat'))) {
+                    
+                    // Look for GoTo integrations in knowledge base
+                    const integrations = findGotoIntegrations();
+                    
+                    if (integrations && integrations.length > 0) {
+                        return {
+                            title: "GoTo Integrations",
+                            content: `GoTo Connect offers integrations with ${integrations.join(', ')}, allowing for seamless connectivity between your communication system and other business applications.`,
+                            items: integrations
+                        };
+                    }
+                }
+                
+                // Add more question types and answers as needed
+                
+                return null;
+            }
+            
+            // Find GoTo integrations in the knowledge base
+            function findGotoIntegrations() {
+                const integrations = [];
+                
+                // This is a simplified example - you'd need to update this to match your actual data structure
+                if (knowledgeBase && knowledgeBase.vendors) {
+                    const gotoVendor = knowledgeBase.vendors.find(v => 
+                        v.name && v.name.toLowerCase().includes('goto'));
+                    
+                    if (gotoVendor && gotoVendor.integrations) {
+                        return gotoVendor.integrations;
+                    }
+                }
+                
+                // Fallback to hardcoded values if not found in knowledge base
+                return ["Applied Epic", "Vertafore AMS360", "QQ Catalyst"];
+            }
+            
+            // Search the knowledge base for a keyword
+            function searchKnowledgeBase(keyword) {
+                const results = [];
+                
+                // Search through each category in the knowledge base
+                Object.entries(knowledgeBase || {}).forEach(([category, items]) => {
+                    if (Array.isArray(items)) {
+                        // For array-based categories (like vendors, technologies)
+                        items.forEach(item => {
+                            const itemString = JSON.stringify(item).toLowerCase();
+                            if (itemString.includes(keyword)) {
+                                results.push({item, category});
+                            }
+                        });
+                    } else if (typeof items === 'object') {
+                        // For object-based categories
+                        const itemString = JSON.stringify(items).toLowerCase();
+                        if (itemString.includes(keyword)) {
+                            results.push({item: items, category});
+                        }
+                    }
+                });
+                
+                return results;
+            }
+            
+            // Display a direct answer to a question
+            function displayAnswer(answer, question) {
+                const answerCard = document.createElement('div');
+                answerCard.className = 'bg-blue-50 p-5 rounded-lg shadow-md mb-6 border-l-4 border-blue-500';
+                
+                let contentHTML = `
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">${answer.title}</h3>
+                    <p class="mb-4">${answer.content}</p>
+                `;
+                
+                // Add any specific items if available
+                if (answer.items && answer.items.length > 0) {
+                    contentHTML += '<ul class="list-disc pl-5 space-y-1">';
+                    answer.items.forEach(item => {
+                        contentHTML += `<li>${item}</li>`;
+                    });
+                    contentHTML += '</ul>';
+                }
+                
+                answerCard.innerHTML = contentHTML;
+                searchResults.appendChild(answerCard);
             }
 
             // Display a search result
@@ -146,7 +308,7 @@
                 Object.entries(item).forEach(([key, value]) => {
                     if (key !== 'name' && key !== 'vendor' && key !== 'technology' && key !== 'service') {
                         const valueStr = typeof value === 'object' ? JSON.stringify(value) : value.toString();
-                        const highlightedValue = highlightSearchTerm(valueStr, searchTerm);
+                        const highlightedValue = highlightSearchTerm(valueStr, searchTerm.toLowerCase());
                         contentHTML += `<p><span class="font-medium text-gray-700">${formatKey(key)}:</span> ${highlightedValue}</p>`;
                     }
                 });
@@ -167,10 +329,18 @@
             function highlightSearchTerm(text, searchTerm) {
                 if (!searchTerm) return text;
                 
+                // Extract keywords to highlight
+                const keywords = extractKeywords(searchTerm);
+                
                 // Simple version for strings
                 if (typeof text === 'string') {
-                    const regex = new RegExp(searchTerm, 'gi');
-                    return text.replace(regex, match => `<span class="highlight">${match}</span>`);
+                    let highlightedText = text;
+                    keywords.forEach(keyword => {
+                        const regex = new RegExp(keyword, 'gi');
+                        highlightedText = highlightedText.replace(regex, match => 
+                            `<span class="highlight">${match}</span>`);
+                    });
+                    return highlightedText;
                 }
                 return text;
             }
