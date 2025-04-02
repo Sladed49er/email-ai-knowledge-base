@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matt Slade - Knowledge Base Search</title>
+    <title>NetStar Knowledge Base Search</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -18,21 +18,48 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .document-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
+        .doc-icon {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
         }
-        .property-row {
+        .web-icon {
+            color: #4285F4;
+        }
+        .file-icon {
+            color: #4285F4;
+        }
+        .pdf-icon {
+            color: #EA4335;
+        }
+        .word-icon {
+            color: #4285F4;
+        }
+        .excel-icon {
+            color: #34A853;
+        }
+        .csv-icon {
+            color: #34A853;
+        }
+        .tabs {
             display: flex;
-            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
         }
-        .property-label {
-            font-weight: 600;
-            width: 120px;
-            color: #4B5563;
+        .tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
         }
-        .property-value {
-            flex: 1;
+        .tab.active {
+            border-bottom: 2px solid #3b82f6;
+            color: #3b82f6;
+            font-weight: 500;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
         }
     </style>
 </head>
@@ -54,6 +81,17 @@
             <div class="mt-2 text-sm text-gray-500">
                 Try asking: "What integrations does GoTo provide?" or "Which vendors offer cloud services?"
             </div>
+            <div class="mt-4">
+                <label class="flex items-center">
+                    <input type="checkbox" id="includeWebResults" class="mr-2" checked>
+                    <span>Include web search results</span>
+                </label>
+            </div>
+        </div>
+
+        <div id="loadingIndicator" class="max-w-4xl mx-auto text-center py-4 hidden">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div>
+            <p class="mt-2 text-gray-600">Searching...</p>
         </div>
 
         <div id="resultsContainer" class="max-w-4xl mx-auto">
@@ -61,8 +99,16 @@
             <div id="initialMessage" class="text-center text-gray-500 py-8">
                 Enter a search term or ask a question to find information from your knowledge base
             </div>
-            <div id="directAnswer" class="mb-6 hidden"></div>
-            <div id="searchResults" class="space-y-4"></div>
+            
+            <div id="searchResultsArea" class="hidden">
+                <div class="tabs mb-6">
+                    <div class="tab active" data-tab="kb">Knowledge Base (<span id="kbResultCount">0</span>)</div>
+                    <div class="tab" data-tab="web">Web Results (<span id="webResultCount">0</span>)</div>
+                </div>
+                
+                <div id="kbResults" class="tab-content active space-y-4"></div>
+                <div id="webResults" class="tab-content space-y-4"></div>
+            </div>
         </div>
     </div>
 
@@ -70,35 +116,46 @@
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
             const searchButton = document.getElementById('searchButton');
-            const searchResults = document.getElementById('searchResults');
-            const directAnswer = document.getElementById('directAnswer');
+            const includeWebResults = document.getElementById('includeWebResults');
             const initialMessage = document.getElementById('initialMessage');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const searchResultsArea = document.getElementById('searchResultsArea');
+            const kbResults = document.getElementById('kbResults');
+            const webResults = document.getElementById('webResults');
+            const kbResultCount = document.getElementById('kbResultCount');
+            const webResultCount = document.getElementById('webResultCount');
+            
             let knowledgeBase = null;
 
-            // Keywords to extract from natural language questions
-            const keywordMap = {
-                'integration': ['integration', 'connect', 'connection', 'connects', 'integrates', 'api'],
-                'security': ['security', 'secure', 'protection', 'protect', 'safe'],
-                'cloud': ['cloud', 'hosted', 'saas', 'online'],
-                'voip': ['voip', 'phone', 'telephony', 'call', 'voice'],
-                'vendor': ['vendor', 'provider', 'company', 'partner'],
-                'microsoft': ['microsoft', 'ms', 'azure', '365', 'office'],
-                'aws': ['aws', 'amazon'],
-                'cisco': ['cisco', 'webex'],
-                'goto': ['goto', 'logmein'],
-                'nextive': ['nextive', 'nexitive'],
-                'network': ['network', 'routing', 'switch', 'infrastructure']
-            };
+            // Set up tab functionality
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab content
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show relevant tab content
+                    const tabName = this.getAttribute('data-tab');
+                    document.getElementById(tabName + 'Results').classList.add('active');
+                });
+            });
 
-            // Document type icons
-            const documentIcons = {
-                'docx': 'fas fa-file-word text-blue-500',
-                'xlsx': 'fas fa-file-excel text-green-500',
-                'pptx': 'fas fa-file-powerpoint text-red-500',
-                'pdf': 'fas fa-file-pdf text-red-700',
-                'md': 'fas fa-file-alt text-gray-700',
-                'json': 'fas fa-file-code text-yellow-600',
-                'default': 'fas fa-file text-gray-500'
+            // File type icons mapping
+            const fileTypeIcons = {
+                'pdf': '<i class="fas fa-file-pdf doc-icon pdf-icon"></i>',
+                'docx': '<i class="fas fa-file-word doc-icon word-icon"></i>',
+                'doc': '<i class="fas fa-file-word doc-icon word-icon"></i>',
+                'xlsx': '<i class="fas fa-file-excel doc-icon excel-icon"></i>',
+                'xls': '<i class="fas fa-file-excel doc-icon excel-icon"></i>',
+                'csv': '<i class="fas fa-file-csv doc-icon csv-icon"></i>',
+                'web': '<i class="fas fa-globe doc-icon web-icon"></i>',
+                'default': '<i class="fas fa-file doc-icon file-icon"></i>'
             };
 
             // Fetch the knowledge base
@@ -118,7 +175,7 @@
                 })
                 .catch(error => {
                     console.error('Error loading knowledge base:', error);
-                    searchResults.innerHTML = `
+                    kbResults.innerHTML = `
                         <div class="bg-red-100 text-red-700 p-4 rounded-md">
                             <p class="font-medium">Error loading knowledge base</p>
                             <p>Please check your internet connection or repository URL.</p>
@@ -126,457 +183,382 @@
                     `;
                 });
 
-            // Process natural language questions to extract keywords
-            function extractKeywords(question) {
-                question = question.toLowerCase();
-                let extractedKeywords = [];
-                
-                // Check for vendor names first (most specific)
-                Object.entries(knowledgeBase || {}).forEach(([category, items]) => {
-                    if (category === 'vendors' && Array.isArray(items)) {
-                        items.forEach(vendor => {
-                            if (vendor.name && question.includes(vendor.name.toLowerCase())) {
-                                extractedKeywords.push(vendor.name.toLowerCase());
-                            }
-                        });
-                    }
-                });
-                
-                // Then check for other keyword matches
-                Object.entries(keywordMap).forEach(([category, keywords]) => {
-                    keywords.forEach(keyword => {
-                        if (question.includes(keyword)) {
-                            extractedKeywords.push(category);
-                        }
-                    });
-                });
-                
-                // If it's a question about what something does/provides
-                if (question.includes('what') && 
-                   (question.includes('do') || question.includes('does') || 
-                    question.includes('provide') || question.includes('offer'))) {
-                    
-                    // Already added vendor names above
-                    extractedKeywords.push('integration');
-                }
-                
-                // If it's asking about "which vendors"
-                if (question.includes('which') && question.includes('vendor')) {
-                    extractedKeywords.push('vendor');
-                }
-                
-                // Remove duplicates
-                extractedKeywords = [...new Set(extractedKeywords)];
-                
-                // If no keywords found, use individual words from the question
-                // (but filter out common stop words)
-                if (extractedKeywords.length === 0) {
-                    const stopWords = ['what', 'which', 'how', 'is', 'are', 'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'with', 'by', 'about', 'like', 'through', 'over', 'before', 'after', 'between', 'under', 'during', 'without', 'of', 'does', 'do', 'did'];
-                    const words = question.split(/\s+/);
-                    words.forEach(word => {
-                        if (!stopWords.includes(word) && word.length > 2) {
-                            extractedKeywords.push(word);
-                        }
-                    });
-                }
-                
-                return extractedKeywords.length > 0 ? extractedKeywords : [question];
-            }
-
             // Search function
-            function performSearch() {
-                const searchInput = document.getElementById('searchInput').value.trim();
+            async function performSearch() {
+                const query = searchInput.value.trim();
                 
-                if (!searchInput) {
+                if (!query) {
                     initialMessage.style.display = 'block';
-                    directAnswer.classList.add('hidden');
-                    searchResults.innerHTML = '';
+                    searchResultsArea.classList.add('hidden');
                     return;
                 }
 
-                if (!knowledgeBase) {
-                    searchResults.innerHTML = `
-                        <div class="bg-yellow-100 text-yellow-700 p-4 rounded-md">
-                            <p>Knowledge base is still loading. Please try again in a moment.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
+                // Show loading indicator
                 initialMessage.style.display = 'none';
-                directAnswer.classList.add('hidden');
-                directAnswer.innerHTML = '';
-                searchResults.innerHTML = '';
+                loadingIndicator.classList.remove('hidden');
+                searchResultsArea.classList.add('hidden');
+                
+                // Clear previous results
+                kbResults.innerHTML = '';
+                webResults.innerHTML = '';
+                kbResultCount.textContent = '0';
+                webResultCount.textContent = '0';
                 
                 // Update URL with the search query
-                window.history.replaceState({}, '', `?q=${encodeURIComponent(searchInput)}`);
+                window.history.replaceState({}, '', `?q=${encodeURIComponent(query)}`);
                 
-                // Extract keywords from the question/search
-                const keywords = extractKeywords(searchInput);
-                console.log('Extracted keywords:', keywords);
+                // Search knowledge base
+                const kbSearchResults = await searchKnowledgeBase(query);
                 
-                let resultsFound = false;
-                
-                // For queries that look like questions about integrations
-                if (isIntegrationQuestion(searchInput)) {
-                    // Try to generate a direct answer about integrations
-                    const vendorName = findVendorInQuestion(searchInput);
-                    if (vendorName) {
-                        const integrationInfo = findVendorIntegrations(vendorName);
-                        if (integrationInfo) {
-                            displayIntegrationAnswer(integrationInfo, searchInput);
-                            resultsFound = true;
-                        }
-                    }
-                }
-
-                // Also show matching results from knowledge base
-                const allResults = [];
-                
-                keywords.forEach(keyword => {
-                    const matches = searchKnowledgeBase(keyword.toLowerCase());
-                    matches.forEach(match => {
-                        // Avoid duplicates in results
-                        const isDuplicate = allResults.some(r => 
-                            r.category === match.category && 
-                            JSON.stringify(r.item) === JSON.stringify(match.item)
-                        );
-                        
-                        if (!isDuplicate) {
-                            allResults.push(match);
-                            resultsFound = true;
-                        }
+                // Display knowledge base results
+                if (kbSearchResults.length > 0) {
+                    kbSearchResults.forEach(result => {
+                        displayKBResult(result.item, result.category, query);
                     });
-                });
-                
-                // Display all unique results
-                allResults.forEach(match => {
-                    displayResult(match.item, match.category, searchInput);
-                });
-
-                if (!resultsFound) {
-                    searchResults.innerHTML = `
+                    kbResultCount.textContent = kbSearchResults.length;
+                } else {
+                    kbResults.innerHTML = `
                         <div class="bg-gray-100 p-4 rounded-md text-center">
-                            <p class="text-gray-700">No results found for "${searchInput}"</p>
-                            <p class="text-gray-500 text-sm mt-1">Try a different search term or check spelling</p>
+                            <p class="text-gray-700">No knowledge base results found for "${query}"</p>
                         </div>
                     `;
                 }
-            }
-            
-            // Check if input is asking about integrations
-            function isIntegrationQuestion(input) {
-                input = input.toLowerCase();
-                return (input.includes('integration') || input.includes('connect')) && 
-                       (input.includes('what') || input.includes('which') || input.includes('how'));
-            }
-            
-            // Find vendor name in a question
-            function findVendorInQuestion(question) {
-                question = question.toLowerCase();
                 
-                // Try to match vendor names from the knowledge base
-                if (knowledgeBase && knowledgeBase.vendors) {
-                    for (const vendor of knowledgeBase.vendors) {
-                        if (vendor.name && question.includes(vendor.name.toLowerCase())) {
-                            return vendor.name;
+                // Search web if checkbox is checked
+                if (includeWebResults.checked) {
+                    try {
+                        const webSearchResults = await searchWeb(query);
+                        
+                        if (webSearchResults.length > 0) {
+                            webSearchResults.forEach(result => {
+                                displayWebResult(result, query);
+                            });
+                            webResultCount.textContent = webSearchResults.length;
+                        } else {
+                            webResults.innerHTML = `
+                                <div class="bg-gray-100 p-4 rounded-md text-center">
+                                    <p class="text-gray-700">No web results found for "${query}"</p>
+                                </div>
+                            `;
                         }
+                    } catch (error) {
+                        console.error('Error searching web:', error);
+                        webResults.innerHTML = `
+                            <div class="bg-yellow-100 p-4 rounded-md text-center">
+                                <p class="text-yellow-700">Error fetching web results</p>
+                            </div>
+                        `;
                     }
+                } else {
+                    webResults.innerHTML = `
+                        <div class="bg-gray-100 p-4 rounded-md text-center">
+                            <p class="text-gray-500">Web search is disabled</p>
+                        </div>
+                    `;
                 }
                 
-                // Check for specific vendor keywords from our mapping
-                for (const [vendorKey, keywords] of Object.entries(keywordMap)) {
-                    if (['microsoft', 'aws', 'cisco', 'goto', 'nextive'].includes(vendorKey)) {
-                        for (const keyword of keywords) {
-                            if (question.includes(keyword)) {
-                                return vendorKey.charAt(0).toUpperCase() + vendorKey.slice(1);
-                            }
-                        }
-                    }
-                }
+                // Hide loading indicator and show results
+                loadingIndicator.classList.add('hidden');
+                searchResultsArea.classList.remove('hidden');
                 
-                return null;
+                // If no knowledge base results but web results exist, switch to web tab
+                if (kbSearchResults.length === 0 && includeWebResults.checked) {
+                    document.querySelector('.tab[data-tab="web"]').click();
+                }
             }
             
-            // Find integration information for a vendor
-            function findVendorIntegrations(vendorName) {
-                if (!knowledgeBase || !knowledgeBase.vendors) return null;
-                
-                const normalizedVendorName = vendorName.toLowerCase();
-                
-                // Search for the vendor in the knowledge base
-                for (const vendor of knowledgeBase.vendors) {
-                    if (vendor.name && vendor.name.toLowerCase() === normalizedVendorName) {
-                        // If vendor has integrations property, use that
-                        if (vendor.integrations) {
-                            return {
-                                vendorName: vendor.name,
-                                integrations: vendor.integrations,
-                                description: vendor.description || ''
-                            };
-                        }
-                    }
+            // Search the knowledge base
+            async function searchKnowledgeBase(query) {
+                if (!knowledgeBase) {
+                    return [];
                 }
                 
-                // Look for document references about this vendor's integrations
-                const integrationDocs = [];
-                if (knowledgeBase.documents) {
-                    for (const doc of knowledgeBase.documents) {
-                        const docContent = JSON.stringify(doc).toLowerCase();
-                        if (docContent.includes(normalizedVendorName) && 
-                            (docContent.includes('integration') || docContent.includes('connect'))) {
-                            integrationDocs.push(doc);
-                        }
-                    }
-                }
-                
-                if (integrationDocs.length > 0) {
-                    return {
-                        vendorName: vendorName,
-                        integrationDocs: integrationDocs,
-                        description: ''
-                    };
-                }
-                
-                // Fallback for specific vendors with hardcoded data
-                // This would be used when the knowledge base doesn't contain the information
-                if (normalizedVendorName === 'goto') {
-                    return {
-                        vendorName: 'GoTo',
-                        integrations: ['Applied Epic', 'Vertafore AMS360', 'QQ Catalyst'],
-                        description: 'GoTo offers cloud-based communication solutions.'
-                    };
-                }
-                else if (normalizedVendorName === 'nextive') {
-                    return {
-                        vendorName: 'Nextive',
-                        description: 'Nextive offers integration solutions for various business systems.',
-                        integrationDocs: [{
-                            name: 'Vendor_Integration_Map.docx',
-                            type: 'docx',
-                            description: 'Contains detailed integration information about Nextive.'
-                        }]
-                    };
-                }
-                
-                return null;
-            }
-            
-            // Display integration answer
-            function displayIntegrationAnswer(info, question) {
-                directAnswer.classList.remove('hidden');
-                directAnswer.innerHTML = '';
-                
-                const answerCard = document.createElement('div');
-                answerCard.className = 'bg-blue-50 p-5 rounded-lg shadow-md border-l-4 border-blue-500';
-                
-                let contentHTML = `
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">${info.vendorName} Integrations</h3>
-                `;
-                
-                if (info.description) {
-                    contentHTML += `<p class="mb-4">${info.description}</p>`;
-                }
-                
-                // Display integrations list if available
-                if (info.integrations && info.integrations.length > 0) {
-                    contentHTML += `<p class="mb-2">${info.vendorName} offers integrations with:</p>`;
-                    contentHTML += '<ul class="list-disc pl-5 space-y-1 mb-4">';
-                    info.integrations.forEach(integration => {
-                        contentHTML += `<li>${integration}</li>`;
-                    });
-                    contentHTML += '</ul>';
-                }
-                
-                // Display integration documents if available
-                if (info.integrationDocs && info.integrationDocs.length > 0) {
-                    contentHTML += `<p class="mb-2">Documentation about ${info.vendorName} integrations:</p>`;
-                    contentHTML += '<ul class="list-disc pl-5 space-y-1">';
-                    info.integrationDocs.forEach(doc => {
-                        const docName = doc.name || 'Integration Document';
-                        contentHTML += `<li>${docName}</li>`;
-                    });
-                    contentHTML += '</ul>';
-                    
-                    contentHTML += `<p class="mt-3 text-sm text-gray-600">See detailed results below for more information.</p>`;
-                }
-                
-                answerCard.innerHTML = contentHTML;
-                directAnswer.appendChild(answerCard);
-            }
-            
-            // Search the knowledge base for a keyword
-            function searchKnowledgeBase(keyword) {
                 const results = [];
-                
-                // Skip empty keywords
-                if (!keyword || keyword.trim() === '') return results;
+                const seenResults = new Set(); // To avoid duplicates
+                query = query.toLowerCase();
                 
                 // Search through each category in the knowledge base
-                Object.entries(knowledgeBase || {}).forEach(([category, items]) => {
+                Object.entries(knowledgeBase).forEach(([category, items]) => {
                     if (Array.isArray(items)) {
                         // For array-based categories (like vendors, technologies)
                         items.forEach(item => {
-                            const itemString = JSON.stringify(item).toLowerCase();
-                            if (itemString.includes(keyword)) {
+                            // Create a string representation of the item to check for duplicates
+                            const itemString = JSON.stringify(item);
+                            const itemLower = itemString.toLowerCase();
+                            
+                            // Check if query matches this item
+                            if (itemLower.includes(query) && !seenResults.has(itemString)) {
                                 results.push({item, category});
+                                seenResults.add(itemString);
                             }
                         });
                     } else if (typeof items === 'object') {
                         // For object-based categories
-                        const itemString = JSON.stringify(items).toLowerCase();
-                        if (itemString.includes(keyword)) {
+                        const itemString = JSON.stringify(items);
+                        const itemLower = itemString.toLowerCase();
+                        
+                        // Check if query matches this item
+                        if (itemLower.includes(query) && !seenResults.has(itemString)) {
                             results.push({item: items, category});
+                            seenResults.add(itemString);
                         }
                     }
                 });
                 
                 return results;
             }
+            
+            // Search the web for additional results
+            async function searchWeb(query) {
+                // For demo purposes, return simulated web results
+                // In a real implementation, you would call a search API
+                
+                const vendorKeywords = ['microsoft', 'aws', 'cisco', 'goto', 'nextive'];
+                const queryLower = query.toLowerCase();
+                
+                // Look for vendor names in query
+                let vendorName = null;
+                for (const vendor of vendorKeywords) {
+                    if (queryLower.includes(vendor)) {
+                        vendorName = vendor.charAt(0).toUpperCase() + vendor.slice(1);
+                        break;
+                    }
+                }
+                
+                // Generate web results
+                const results = [];
+                
+                if (vendorName) {
+                    // Vendor-specific results
+                    results.push({
+                        title: `${vendorName} - Official Website`,
+                        url: `https://www.${vendorName.toLowerCase()}.com`,
+                        description: `Official website for ${vendorName}. Browse products, services, documentation, and support resources.`
+                    });
+                    
+                    if (queryLower.includes('integration') || queryLower.includes('connect')) {
+                        results.push({
+                            title: `${vendorName} Integration Documentation`,
+                            url: `https://docs.${vendorName.toLowerCase()}.com/integrations`,
+                            description: `Official integration documentation for ${vendorName} products and services. Learn how to connect with other systems and services.`
+                        });
+                    }
+                    
+                    if (queryLower.includes('cloud')) {
+                        results.push({
+                            title: `${vendorName} Cloud Services Overview`,
+                            url: `https://www.${vendorName.toLowerCase()}.com/cloud`,
+                            description: `Explore ${vendorName}'s cloud offerings including infrastructure, platform, and software-as-a-service solutions.`
+                        });
+                    }
+                } else if (queryLower.includes('cloud') && (queryLower.includes('vendor') || queryLower.includes('provider'))) {
+                    // Cloud vendor results
+                    results.push({
+                        title: "Top Cloud Service Providers of 2025",
+                        url: "https://www.techradar.com/best/best-cloud-providers",
+                        description: "Our guide to the best cloud providers for business, featuring AWS, Microsoft Azure, Google Cloud Platform, and more."
+                    });
+                    
+                    results.push({
+                        title: "Gartner Magic Quadrant for Cloud Infrastructure and Platform Services",
+                        url: "https://www.gartner.com/doc/reprints?id=1-27BUUJBA&ct=220727",
+                        description: "Gartner's analysis of cloud infrastructure and platform service providers, showing leaders, challengers, visionaries, and niche players."
+                    });
+                } else {
+                    // Generic results
+                    results.push({
+                        title: `Search results for: ${query}`,
+                        url: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+                        description: "Find more information about this topic on Google."
+                    });
+                    
+                    results.push({
+                        title: "NetStar Knowledge Base",
+                        url: "https://sladed49er.github.io/email-ai-knowledge-base/",
+                        description: "Search our internal knowledge base for information about vendors, technologies, and services."
+                    });
+                }
+                
+                return results;
+            }
 
-            // Display a search result
-            function displayResult(item, category, searchTerm) {
+            // Display a knowledge base result
+            function displayKBResult(item, category, query) {
                 const resultCard = document.createElement('div');
                 resultCard.className = 'bg-white p-5 rounded-lg shadow-md result-card';
-
-                // Determine if this is a document type result
-                const isDocument = category === 'documents' || item.type === 'docx' || item.type === 'pdf';
                 
-                // Create a title based on item properties
-                let title = item.name || item.vendor || item.technology || item.service || category;
+                // Determine file type and icon
+                let fileType = 'default';
+                let title = '';
                 
-                // Build the content HTML
-                let contentHTML = '';
-                
-                // For document-type results, show an icon
-                if (isDocument) {
-                    const fileType = item.type || getFileExtension(item.name || '') || 'default';
-                    const iconClass = documentIcons[fileType] || documentIcons['default'];
-                    
-                    contentHTML = `
-                        <div class="flex items-start">
-                            <div class="document-icon">
-                                <i class="${iconClass}"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-xl font-semibold text-blue-700 mb-2">${title}</h3>
-                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mb-3">Category: ${formatKey(category)}</span>
-                    `;
-                    
-                    // Add source file information if available
-                    if (item.source_file) {
-                        contentHTML += `<div class="text-sm text-gray-600 mb-3">Source: ${item.source_file}</div>`;
+                if (item.name) {
+                    title = item.name;
+                    // Try to determine file type from name
+                    const fileExtMatch = item.name.match(/\.([a-z0-9]+)$/i);
+                    if (fileExtMatch) {
+                        fileType = fileExtMatch[1].toLowerCase();
                     }
-                    
-                    contentHTML += `<div class="space-y-2">`;
                 } else {
-                    // Standard result format
-                    contentHTML = `
-                        <h3 class="text-xl font-semibold text-blue-700 mb-2">${title}</h3>
-                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mb-3">Category: ${formatKey(category)}</span>
-                        <div class="space-y-2">
-                    `;
+                    title = category.charAt(0).toUpperCase() + category.slice(1);
                 }
                 
-                // Process each property in the item
+                // Override file type if explicitly specified
+                if (item.type) {
+                    fileType = item.type.toLowerCase();
+                }
+                
+                // Get icon for file type
+                const iconHtml = fileTypeIcons[fileType] || fileTypeIcons['default'];
+                
+                // Build the header with icon and title
+                let contentHTML = `
+                    <div class="flex items-center mb-3">
+                        ${iconHtml}
+                        <h3 class="text-xl font-semibold text-blue-700">${title}</h3>
+                    </div>
+                    <div class="mb-3">
+                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                            Category: ${formatKey(category)}
+                        </span>
+                    </div>
+                `;
+                
+                // Build a table of properties
+                contentHTML += '<div class="overflow-hidden bg-gray-50 rounded-md">';
+                contentHTML += '<table class="w-full border-collapse">';
+                
+                // Process each property
                 Object.entries(item).forEach(([key, value]) => {
-                    if (key !== 'name' && key !== 'vendor' && key !== 'technology' && key !== 'service' && key !== 'source_file') {
-                        const valueStr = typeof value === 'object' ? JSON.stringify(value, null, 2) : value.toString();
-                        const highlightedValue = highlightSearchTerm(valueStr, searchTerm.toLowerCase());
-                        
-                        contentHTML += `
-                            <div class="property-row">
-                                <div class="property-label">${formatKey(key)}:</div>
-                                <div class="property-value">${formatValue(highlightedValue, key)}</div>
-                            </div>
-                        `;
+                    // Skip name property as it's already in the title
+                    if (key === 'name') return;
+                    
+                    // Format the property value
+                    let formattedValue = '';
+                    
+                    // Handle different value types
+                    if (typeof value === 'string') {
+                        // Try to parse JSON strings
+                        if ((value.startsWith('{') && value.endsWith('}')) || 
+                            (value.startsWith('[') && value.endsWith(']'))) {
+                            try {
+                                // Replace single quotes with double quotes
+                                const jsonStr = value.replace(/'/g, '"');
+                                const parsed = JSON.parse(jsonStr);
+                                
+                                if (Array.isArray(parsed)) {
+                                    // Format arrays
+                                    formattedValue = '<ul class="list-disc pl-5 space-y-1">';
+                                    parsed.forEach(item => {
+                                        formattedValue += `<li>${highlightText(item.toString(), query)}</li>`;
+                                    });
+                                    formattedValue += '</ul>';
+                                } else {
+                                    // Format objects
+                                    formattedValue = '<div class="pl-3 border-l-2 border-gray-200 space-y-1">';
+                                    Object.entries(parsed).forEach(([k, v]) => {
+                                        formattedValue += `<div><span class="font-medium">${formatKey(k)}:</span> ${highlightText(v.toString(), query)}</div>`;
+                                    });
+                                    formattedValue += '</div>';
+                                }
+                            } catch (e) {
+                                // If parsing fails, just highlight the text
+                                formattedValue = highlightText(value, query);
+                            }
+                        } else {
+                            // Regular string
+                            formattedValue = highlightText(value, query);
+                        }
+                    } else if (Array.isArray(value)) {
+                        // Format arrays
+                        formattedValue = '<ul class="list-disc pl-5 space-y-1">';
+                        value.forEach(item => {
+                            formattedValue += `<li>${highlightText(item.toString(), query)}</li>`;
+                        });
+                        formattedValue += '</ul>';
+                    } else if (value === null || value === undefined) {
+                        formattedValue = '<span class="text-gray-400">None</span>';
+                    } else if (typeof value === 'object') {
+                        // Format objects
+                        formattedValue = '<div class="pl-3 border-l-2 border-gray-200 space-y-1">';
+                        Object.entries(value).forEach(([k, v]) => {
+                            formattedValue += `<div><span class="font-medium">${formatKey(k)}:</span> ${highlightText(v.toString(), query)}</div>`;
+                        });
+                        formattedValue += '</div>';
+                    } else {
+                        // Other types (numbers, booleans)
+                        formattedValue = highlightText(value.toString(), query);
                     }
+                    
+                    // Add the row to the table
+                    contentHTML += `
+                        <tr class="border-b border-gray-200">
+                            <td class="py-2 px-3 bg-gray-100 font-medium text-gray-700 w-1/4">
+                                ${formatKey(key)}
+                            </td>
+                            <td class="py-2 px-3">
+                                ${formattedValue}
+                            </td>
+                        </tr>
+                    `;
                 });
                 
-                contentHTML += `</div>`;
-                
-                // Close the document wrapper div if needed
-                if (isDocument) {
-                    contentHTML += `</div></div>`;
-                }
+                contentHTML += '</table>';
+                contentHTML += '</div>';
                 
                 resultCard.innerHTML = contentHTML;
-                searchResults.appendChild(resultCard);
+                kbResults.appendChild(resultCard);
             }
             
-            // Format a value based on its key and content
-            function formatValue(value, key) {
-                // Format contact information
-                if (key === 'contact' && value.includes('{')) {
-                    try {
-                        const contact = JSON.parse(value.replace(/'/g, '"'));
-                        let formatted = '';
-                        if (contact.primary) formatted += `<div>Primary: ${contact.primary}</div>`;
-                        if (contact.email) formatted += `<div>Email: <a href="mailto:${contact.email}" class="text-blue-600 hover:underline">${contact.email}</a></div>`;
-                        if (contact.accountId) formatted += `<div>Account ID: ${contact.accountId}</div>`;
-                        return formatted || value;
-                    } catch (e) {
-                        return value;
-                    }
-                }
+            // Display a web search result
+            function displayWebResult(result, query) {
+                const resultCard = document.createElement('div');
+                resultCard.className = 'bg-white p-5 rounded-lg shadow-md result-card';
                 
-                // Format arrays
-                if (value.startsWith('[') && value.endsWith(']')) {
-                    try {
-                        const array = JSON.parse(value);
-                        return array.map(item => `<div>${item}</div>`).join('');
-                    } catch (e) {
-                        return value;
-                    }
-                }
+                const contentHTML = `
+                    <div class="flex items-center mb-2">
+                        ${fileTypeIcons['web']}
+                        <h3 class="text-xl font-semibold text-blue-700">${result.title}</h3>
+                    </div>
+                    <div class="mb-2">
+                        <a href="${result.url}" class="text-green-700 text-sm hover:underline" target="_blank">
+                            ${result.url}
+                        </a>
+                    </div>
+                    <p class="text-gray-700">
+                        ${highlightText(result.description, query)}
+                    </p>
+                `;
                 
-                // Format objects
-                if (value.startsWith('{') && value.endsWith('}')) {
-                    try {
-                        const obj = JSON.parse(value);
-                        return Object.entries(obj).map(([k, v]) => {
-                            return `<div><span class="font-medium">${formatKey(k)}:</span> ${v}</div>`;
-                        }).join('');
-                    } catch (e) {
-                        return value;
-                    }
-                }
-                
-                return value;
+                resultCard.innerHTML = contentHTML;
+                webResults.appendChild(resultCard);
             }
-
-            // Format property keys for better display
+            
+            // Format property keys
             function formatKey(key) {
+                if (!key) return '';
                 return key.split(/[_\s]/).map(word => 
                     word.charAt(0).toUpperCase() + word.slice(1)
                 ).join(' ');
             }
-
-            // Get file extension from filename
-            function getFileExtension(filename) {
-                return filename.split('.').pop().toLowerCase();
+            
+            // Highlight query terms in text
+            function highlightText(text, query) {
+                if (!text || !query) return text;
+                
+                const words = query.toLowerCase().split(/\s+/).filter(word => word.length > 2);
+                let result = text;
+                
+                words.forEach(word => {
+                    const regex = new RegExp('\\b(' + escapeRegExp(word) + ')\\b', 'gi');
+                    result = result.replace(regex, '<span class="highlight">$1</span>');
+                });
+                
+                return result;
             }
-
-            // Highlight search term in result text
-            function highlightSearchTerm(text, searchTerm) {
-                if (!searchTerm) return text;
-                
-                // Extract keywords to highlight
-                const keywords = extractKeywords(searchTerm);
-                
-                // Simple version for strings
-                if (typeof text === 'string') {
-                    let highlightedText = text;
-                    keywords.forEach(keyword => {
-                        if (keyword.length > 2) {  // Only highlight keywords longer than 2 chars
-                            const regex = new RegExp('\\b' + keyword + '\\b', 'gi');
-                            highlightedText = highlightedText.replace(regex, match => 
-                                `<span class="highlight">${match}</span>`);
-                        }
-                    });
-                    return highlightedText;
-                }
-                return text;
+            
+            // Escape special regex characters
+            function escapeRegExp(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             }
 
             // Event listeners
@@ -586,7 +568,7 @@
                     performSearch();
                 }
             });
-
+            
             // Auto-focus the search input
             searchInput.focus();
         });
