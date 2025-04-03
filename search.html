@@ -3,50 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Search Knowledge Base</title>
+  <title>Search Vendors</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
+      background-color: #f7f7f7;
       padding: 2rem;
-      background: #f4f4f4;
     }
-    input[type="text"] {
-      width: 300px;
-      padding: 10px;
-      font-size: 16px;
+    h1 {
+      font-size: 2rem;
     }
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      margin-left: 5px;
+    input, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin: 0.5rem 0;
     }
     .result {
-      background: #fff;
+      background: white;
+      border-radius: 8px;
       padding: 1rem;
       margin: 1rem 0;
-      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
   </style>
 </head>
 <body>
-  <h1>Search Your Knowledge Base</h1>
-  <input type="text" id="search-input" placeholder="Type to search..." />
+  <h1><strong>Search Your Vendor Knowledge Base</strong></h1>
+  <input id="search-input" type="text" placeholder="Can you tell me about GoTo?" size="50" />
   <button id="search-button">Search</button>
   <div id="results"></div>
 
   <script>
     document.getElementById('search-button').addEventListener('click', () => {
-      const query = document.getElementById('search-input').value.toLowerCase();
+      const query = document.getElementById('search-input').value.toLowerCase().trim();
       const resultsContainer = document.getElementById('results');
       resultsContainer.innerHTML = '';
+
+      const keywords = query.split(/\s+/).filter(Boolean);
 
       fetch('static-data.json')
         .then(res => res.json())
         .then(data => {
-          const results = data.filter(item =>
-            item.title.toLowerCase().includes(query) ||
-            item.content.toLowerCase().includes(query)
-          );
+          const results = data.filter(item => {
+            const title = item.title.toLowerCase();
+            const content = item.content.toLowerCase();
+            return keywords.some(keyword =>
+              title.includes(keyword) || content.includes(keyword)
+            );
+          });
 
           if (results.length === 0) {
             resultsContainer.innerHTML = '<p>No results found.</p>';
