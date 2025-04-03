@@ -3,52 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vendor Search</title>
+  <title>Vendor Knowledge Base Search</title>
   <style>
-    body { font-family: Arial; padding: 20px; background: #f9f9f9; }
-    #search-box { margin-bottom: 1em; }
-    input[type="text"] { width: 300px; padding: 8px; }
-    button { padding: 8px 12px; }
-    .result { margin-bottom: 1em; background: #fff; padding: 10px; border: 1px solid #ddd; }
-    pre { white-space: pre-wrap; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f4f4f4;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      margin-left: 5px;
+    }
+    .result {
+      background: #fff;
+      padding: 1rem;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
   <h1>Vendor Knowledge Base Search</h1>
-  <div id="search-box">
-    <input type="text" id="search-input" placeholder="Search..."/>
-    <button id="search-button">Search</button>
-  </div>
+  <input type="text" id="search-input" placeholder="Type to search..." />
+  <button id="search-button">Search</button>
   <div id="results"></div>
 
   <script>
-    document.getElementById('search-button').addEventListener('click', () => {
-      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    document.getElementById('search-button').addEventListener('click', function() {
+      const query = document.getElementById('search-input').value.toLowerCase();
       const resultsContainer = document.getElementById('results');
-      resultsContainer.innerHTML = '<p>Searching...</p>';
+      resultsContainer.innerHTML = '';
 
       fetch('static-data.json')
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
           const results = data.filter(item =>
-            item.title.toLowerCase().includes(searchTerm) ||
-            item.content.toLowerCase().includes(searchTerm)
+            item.title.toLowerCase().includes(query) ||
+            item.content.toLowerCase().includes(query)
           );
 
           if (results.length === 0) {
             resultsContainer.innerHTML = '<p>No results found.</p>';
-          } else {
-            resultsContainer.innerHTML = results.map(item => `
-              <div class="result">
-                <h3>${item.title}</h3>
-                <pre>${item.content}</pre>
-              </div>
-            `).join('');
+            return;
           }
+
+          results.forEach(result => {
+            const div = document.createElement('div');
+            div.className = 'result';
+            div.innerHTML = `<h3>${result.title}</h3><pre>${result.content}</pre>`;
+            resultsContainer.appendChild(div);
+          });
         })
-        .catch(error => {
-          console.error('Fetch error:', error);
-          resultsContainer.innerHTML = '<p>Error loading data.</p>';
+        .catch(err => {
+          console.error('Error loading data:', err);
+          resultsContainer.innerHTML = '<p>Error loading search data.</p>';
         });
     });
   </script>
