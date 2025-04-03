@@ -16,13 +16,28 @@
       text-align: center;
       color: #333;
     }
-    input[type="text"] {
+    #searchBox {
       width: 100%;
       padding: 15px;
       font-size: 18px;
-      margin: 20px 0;
       border: 1px solid #ccc;
       border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+    button:hover {
+      background-color: #555;
     }
     .result {
       background: #fff;
@@ -53,6 +68,7 @@
 
   <h1>Search Your AI Knowledge Base</h1>
   <input type="text" id="searchBox" placeholder="Search by keyword, topic, or tool name..." />
+  <button onclick="handleSearchManual()">Search</button>
   <div id="results"></div>
 
   <footer>Powered by your GitHub Knowledge Base · Built with ❤️</footer>
@@ -72,17 +88,25 @@
         console.error('Error fetching knowledge base:', error);
       });
 
-    function handleSearch(event) {
-      const query = event.target.value.toLowerCase();
+    function handleSearchManual() {
+      const event = { target: document.getElementById("searchBox") };
+      handleSearch(event);
+    }
+
+    function handleSearch(e) {
+      const query = e.target.value.toLowerCase().trim();
       const resultsContainer = document.getElementById('results');
       resultsContainer.innerHTML = '';
 
-      if (!query.trim()) return;
+      if (!query || query.length < 2) {
+        return;
+      }
 
-      const results = knowledgeBase.filter(entry => 
-        entry.title.toLowerCase().includes(query) || 
-        entry.content.toLowerCase().includes(query)
-      );
+      const keywords = query.split(/\s+/); // Break into individual keywords
+      const results = knowledgeBase.filter(entry => {
+        const haystack = `${entry.title} ${entry.content}`.toLowerCase();
+        return keywords.every(kw => haystack.includes(kw));
+      });
 
       if (results.length === 0) {
         resultsContainer.innerHTML = '<p>No results found.</p>';
@@ -94,7 +118,7 @@
         div.className = 'result';
         div.innerHTML = `
           <div class="title">${entry.title}</div>
-          <div class="snippet">${entry.content.substring(0, 250)}...</div>
+          <div class="snippet">${entry.content.substring(0, 300)}...</div>
         `;
         resultsContainer.appendChild(div);
       });
