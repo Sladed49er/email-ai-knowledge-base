@@ -1,11 +1,10 @@
-{
-  "data": [
-    {
-      "file": "data/vendor-example.md",
-      "title": "Example Company",
-      "text": "This is information about Example Company including contact details and email templates.",
-      "relevance": 0.95
-    }
-  ],
-  "message": "This is a static data file that can be used while the search API is being configured."
-}
+[
+  {
+    "title": "8x8.txt",
+    "content": "Source File: 8x8.md\nContact: Unknown (unknown@example.com)\nKeywords: 8x8.txt, 8x8, example.com\nNotes: "
+  },
+  {
+    "title": "About_Matt_Slade.txt",
+    "content": "Source File: About_Matt_Slade.md\nContact: Unknown (unknown@example.com)\nKeywords: about_matt_slade.txt, about_matt_slade, example.com\nNotes: "
+  }
+]
