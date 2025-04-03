@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Search Vendors</title>
+  <title>Search Knowledge Base</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
   </style>
 </head>
 <body>
-  <h1>Search Your Vendor Knowledge Base</h1>
+  <h1>Search Your Knowledge Base</h1>
   <input type="text" id="search-input" placeholder="Type to search..." />
   <button id="search-button">Search</button>
   <div id="results"></div>
@@ -43,10 +43,9 @@
       fetch('static-data.json')
         .then(res => res.json())
         .then(data => {
-          const vendors = data.vendors || [];
-          const results = vendors.filter(vendor =>
-            vendor.name.toLowerCase().includes(query) ||
-            (vendor.keywords && vendor.keywords.some(k => k.toLowerCase().includes(query)))
+          const results = data.filter(item =>
+            item.title.toLowerCase().includes(query) ||
+            item.content.toLowerCase().includes(query)
           );
 
           if (results.length === 0) {
@@ -54,14 +53,12 @@
             return;
           }
 
-          results.forEach(vendor => {
+          results.forEach(item => {
             const div = document.createElement('div');
             div.className = 'result';
             div.innerHTML = `
-              <h3>${vendor.name}</h3>
-              <p><strong>Email:</strong> ${vendor.contact?.email || 'N/A'}</p>
-              <p><strong>Keywords:</strong> ${vendor.keywords?.join(', ') || 'N/A'}</p>
-              <p><strong>Source File:</strong> ${vendor.source_file || 'N/A'}</p>
+              <h3>${item.title}</h3>
+              <pre>${item.content}</pre>
             `;
             resultsContainer.appendChild(div);
           });
