@@ -1,32 +1,56 @@
-<script>
-  document.getElementById('search-button').addEventListener('click', function () {
-    const searchTerm = document.getElementById('search-input').value.toLowerCase();
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = '<p>Searching...</p>';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vendor Search</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f9f9f9; }
+    #search-box { margin-bottom: 1em; }
+    input[type="text"] { width: 300px; padding: 8px; }
+    button { padding: 8px 12px; }
+    .result { margin-bottom: 1em; background: #fff; padding: 10px; border: 1px solid #ddd; }
+    pre { white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Vendor Knowledge Base Search</h1>
+  <div id="search-box">
+    <input type="text" id="search-input" placeholder="Search..."/>
+    <button id="search-button">Search</button>
+  </div>
+  <div id="results"></div>
 
-    fetch('static-data.json')
-      .then(response => response.json())
-      .then(data => {
-        const results = data.filter(item =>
-          item.title.toLowerCase().includes(searchTerm) ||
-          item.content.toLowerCase().includes(searchTerm)
-        );
+  <script>
+    document.getElementById('search-button').addEventListener('click', () => {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const resultsContainer = document.getElementById('results');
+      resultsContainer.innerHTML = '<p>Searching...</p>';
 
-        if (results.length === 0) {
-          resultsContainer.innerHTML = '<p>No results found.</p>';
-        } else {
-          resultsContainer.innerHTML = results
-            .map(item => `
+      fetch('static-data.json')
+        .then(response => response.json())
+        .then(data => {
+          const results = data.filter(item =>
+            item.title.toLowerCase().includes(searchTerm) ||
+            item.content.toLowerCase().includes(searchTerm)
+          );
+
+          if (results.length === 0) {
+            resultsContainer.innerHTML = '<p>No results found.</p>';
+          } else {
+            resultsContainer.innerHTML = results.map(item => `
               <div class="result">
                 <h3>${item.title}</h3>
                 <pre>${item.content}</pre>
               </div>
             `).join('');
-        }
-      })
-      .catch(err => {
-        console.error('Search error:', err);
-        resultsContainer.innerHTML = '<p>Error loading search data.</p>';
-      });
-  });
-</script>
+          }
+        })
+        .catch(error => {
+          console.error('Fetch error:', error);
+          resultsContainer.innerHTML = '<p>Error loading data.</p>';
+        });
+    });
+  </script>
+</body>
+</html>
