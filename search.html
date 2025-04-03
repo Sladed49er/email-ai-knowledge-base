@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vendor Knowledge Base Search</title>
+  <title>Search Vendors</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -26,19 +26,16 @@
       margin: 1rem 0;
       border: 1px solid #ccc;
     }
-    pre {
-      white-space: pre-wrap;
-    }
   </style>
 </head>
 <body>
-  <h1>Vendor Knowledge Base Search</h1>
+  <h1>Search Your Vendor Knowledge Base</h1>
   <input type="text" id="search-input" placeholder="Type to search..." />
   <button id="search-button">Search</button>
   <div id="results"></div>
 
   <script>
-    document.getElementById('search-button').addEventListener('click', function() {
+    document.getElementById('search-button').addEventListener('click', () => {
       const query = document.getElementById('search-input').value.toLowerCase();
       const resultsContainer = document.getElementById('results');
       resultsContainer.innerHTML = '';
@@ -46,9 +43,10 @@
       fetch('static-data.json')
         .then(res => res.json())
         .then(data => {
-          const results = data.filter(item =>
-            item.title.toLowerCase().includes(query) ||
-            item.content.toLowerCase().includes(query)
+          const vendors = data.vendors || [];
+          const results = vendors.filter(vendor =>
+            vendor.name.toLowerCase().includes(query) ||
+            (vendor.keywords && vendor.keywords.some(k => k.toLowerCase().includes(query)))
           );
 
           if (results.length === 0) {
@@ -56,15 +54,20 @@
             return;
           }
 
-          results.forEach(result => {
+          results.forEach(vendor => {
             const div = document.createElement('div');
             div.className = 'result';
-            div.innerHTML = `<h3>${result.title}</h3><pre>${result.content}</pre>`;
+            div.innerHTML = `
+              <h3>${vendor.name}</h3>
+              <p><strong>Email:</strong> ${vendor.contact?.email || 'N/A'}</p>
+              <p><strong>Keywords:</strong> ${vendor.keywords?.join(', ') || 'N/A'}</p>
+              <p><strong>Source File:</strong> ${vendor.source_file || 'N/A'}</p>
+            `;
             resultsContainer.appendChild(div);
           });
         })
         .catch(err => {
-          console.error('Error loading data:', err);
+          console.error('Error loading or parsing JSON:', err);
           resultsContainer.innerHTML = '<p>Error loading search data.</p>';
         });
     });
