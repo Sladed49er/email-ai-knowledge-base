@@ -1,10 +1,518 @@
 [
   {
     "title": "8x8.txt",
-    "content": "Source File: 8x8.md\nContact: Unknown (unknown@example.com)\nKeywords: 8x8.txt, 8x8, example.com\nNotes: "
+    "content": "Keywords: 8x8.txt, 8x8, example.com\nSource: 8x8.md"
   },
   {
     "title": "About_Matt_Slade.txt",
-    "content": "Source File: About_Matt_Slade.md\nContact: Unknown (unknown@example.com)\nKeywords: about_matt_slade.txt, about_matt_slade, example.com\nNotes: "
+    "content": "Keywords: about_matt_slade.txt, about_matt_slade, example.com\nSource: About_Matt_Slade.md"
+  },
+  {
+    "title": "Adobe.txt",
+    "content": "Keywords: adobe, example.com, adobe.txt\nSource: Adobe.md"
+  },
+  {
+    "title": "Afore 1.pdf",
+    "content": "Keywords: example.com, afore, afore 1.pdf, afore 1\nSource: Afore 1.md"
+  },
+  {
+    "title": "Afore Cyber.pdf",
+    "content": "Keywords: afore cyber.pdf, afore, example.com, afore cyber, cyber\nSource: Afore Cyber.md"
+  },
+  {
+    "title": "After Zoe's Edits - The Insurance Agency's Non-Techie Guide to - Matthew Slade.pdf",
+    "content": "Keywords: insurance, after, slade, after zoe's edits - the insurance agency's non-techie guide to - matthew slade.pdf, techie, example.com, agency, matthew, after zoe's edits - the insurance agency's non-techie guide to - matthew slade, edits, guide\nSource: After Zoe's Edits - The Insurance Agency's Non-Techie Guide to - Matthew Slade.md"
+  },
+  {
+    "title": "After Zoe's Edits The Insurance Agency's Non-Techie Guide to Cyber Security.pdf",
+    "content": "Keywords: security, insurance, after zoe's edits the insurance agency's non-techie guide to cyber security.pdf, after, after zoe's edits the insurance agency's non-techie guide to cyber security, techie, example.com, agency, cyber, edits, guide\nSource: After Zoe's Edits The Insurance Agency's Non-Techie Guide to Cyber Security.md"
+  },
+  {
+    "title": "all_companies.csv",
+    "content": "Keywords: example.com, all_companies.csv, all_companies\nSource: all_companies.md"
+  },
+  {
+    "title": "AppliedEpic.txt",
+    "content": "Keywords: example.com, appliedepic, appliedepic.txt\nSource: AppliedEpic.md"
+  },
+  {
+    "title": "Backup of Mansur.docx",
+    "content": "Keywords: backup of mansur, docx, backup, example.com, backup of mansur.docx, mansur\nSource: Backup of Mansur.md"
+  },
+  {
+    "title": "Basic Shoretel Implementation.pdf",
+    "content": "Keywords: basic shoretel implementation.pdf, example.com, basic shoretel implementation, shoretel, implementation, basic\nSource: Basic Shoretel Implementation.md"
+  },
+  {
+    "title": "Biggs Insurance Case Study.pdf",
+    "content": "Keywords: insurance, biggs insurance case study, biggs insurance case study.pdf, example.com, case, biggs, study\nSource: Biggs Insurance Case Study.md"
+  },
+  {
+    "title": "book_1.docx",
+    "content": "Keywords: book_1.docx, book_1, docx, example.com\nSource: book_1.md"
+  },
+  {
+    "title": "Both Case Studies.pdf",
+    "content": "Keywords: both case studies.pdf, both case studies, example.com, case, studies, both\nSource: Both Case Studies.md"
+  },
+  {
+    "title": "BTC.com Bitcoin Wallet Recovery Backup Sheet - mywallet-1c99cae8d217aaad 2.pdf",
+    "content": "Keywords: btc.com bitcoin wallet recovery backup sheet - mywallet-1c99cae8d217aaad 2.pdf, btc.com bitcoin wallet recovery backup sheet - mywallet-1c99cae8d217aaad 2, backup, wallet, example.com, 1c99cae8d217aaad, bitcoin, sheet, recovery, mywallet\nSource: BTC.com Bitcoin Wallet Recovery Backup Sheet - mywallet-1c99cae8d217aaad 2.md"
+  },
+  {
+    "title": "BTC.com Bitcoin Wallet Recovery Backup Sheet - mywallet-1c99cae8d217aaad.pdf",
+    "content": "Keywords: btc.com bitcoin wallet recovery backup sheet - mywallet-1c99cae8d217aaad, backup, wallet, example.com, 1c99cae8d217aaad, bitcoin, sheet, recovery, btc.com bitcoin wallet recovery backup sheet - mywallet-1c99cae8d217aaad.pdf, mywallet\nSource: BTC.com Bitcoin Wallet Recovery Backup Sheet - mywallet-1c99cae8d217aaad.md"
+  },
+  {
+    "title": "Business Case - Windstream.docx",
+    "content": "Keywords: docx, example.com, windstream, case, business, business case - windstream, business case - windstream.docx\nSource: Business Case - Windstream.md"
+  },
+  {
+    "title": "Call Flow Wong & Associates.pdf",
+    "content": "Keywords: flow, call flow wong & associates, associates, call flow wong & associates.pdf, example.com, wong, call\nSource: Call Flow Wong & Associates.md"
+  },
+  {
+    "title": "Chart.pdf",
+    "content": "Keywords: chart.pdf, example.com, chart\nSource: Chart.md"
+  },
+  {
+    "title": "Cloud Implementation Proposal.pdf",
+    "content": "Keywords: proposal, cloud implementation proposal.pdf, cloud implementation proposal, cloud, example.com, implementation\nSource: Cloud Implementation Proposal.md"
+  },
+  {
+    "title": "Cloud Proposal.docx",
+    "content": "Keywords: proposal, cloud proposal.docx, docx, cloud, example.com, cloud proposal\nSource: Cloud Proposal.md"
+  },
+  {
+    "title": "Comcast.txt",
+    "content": "Keywords: example.com, comcast, comcast.txt\nSource: Comcast.md"
+  },
+  {
+    "title": "Comp.pdf",
+    "content": "Keywords: comp, example.com, comp.pdf\nSource: Comp.md"
+  },
+  {
+    "title": "conferenceroster2018.pdf",
+    "content": "Keywords: conferenceroster2018.pdf, conferenceroster2018, example.com\nSource: conferenceroster2018.md"
+  },
+  {
+    "title": "Confie Solution.docx",
+    "content": "Keywords: confie solution, confie, docx, example.com, solution, confie solution.docx\nSource: Confie Solution.md"
+  },
+  {
+    "title": "Connectivity_companies.csv",
+    "content": "Keywords: example.com, connectivity_companies.csv, connectivity_companies\nSource: Connectivity_companies.md"
+  },
+  {
+    "title": "Copy of 8x8.txt",
+    "content": "Keywords: copy of 8x8.txt, copy of 8x8, example.com, copy\nSource: Copy of 8x8.md"
+  },
+  {
+    "title": "Copy of GoTo.txt",
+    "content": "Keywords: goto, copy of goto, example.com, copy, copy of goto.txt\nSource: Copy of GoTo.md"
+  },
+  {
+    "title": "Copy of Nextiva.txt",
+    "content": "Keywords: copy of nextiva, example.com, copy, copy of nextiva.txt, nextiva\nSource: Copy of Nextiva.md"
+  },
+  {
+    "title": "Copy of RingCentral.txt",
+    "content": "Keywords: copy of ringcentral.txt, example.com, copy, ringcentral, copy of ringcentral\nSource: Copy of RingCentral.md"
+  },
+  {
+    "title": "Copy of Zoom.txt",
+    "content": "Keywords: zoom, example.com, copy, copy of zoom, copy of zoom.txt\nSource: Copy of Zoom.md"
+  },
+  {
+    "title": "Crest.pdf",
+    "content": "Keywords: crest, crest.pdf, example.com\nSource: Crest.md"
+  },
+  {
+    "title": "CSR24.docx",
+    "content": "Keywords: docx, csr24.docx, example.com, csr24\nSource: CSR24.md"
+  },
+  {
+    "title": "Cyber Assurace Explainatory TFinn ltr032425.docx",
+    "content": "Keywords: tfinn, docx, ltr032425, example.com, explainatory, cyber assurace explainatory tfinn ltr032425.docx, cyber assurace explainatory tfinn ltr032425, cyber, assurace\nSource: Cyber Assurace Explainatory TFinn ltr032425.md"
+  },
+  {
+    "title": "Cyber Security Book In the works.docx",
+    "content": "Keywords: security, cyber security book in the works.docx, works, cyber security book in the works, docx, example.com, book, cyber\nSource: Cyber Security Book In the works.md"
+  },
+  {
+    "title": "Cyber Security Book.pdf",
+    "content": "Keywords: security, cyber security book.pdf, example.com, cyber security book, book, cyber\nSource: Cyber Security Book.md"
+  },
+  {
+    "title": "Cybersecurity_Strategy.docx",
+    "content": "Keywords: example.com, cybersecurity_strategy.docx, docx, cybersecurity_strategy\nSource: Cybersecurity_Strategy.md"
+  },
+  {
+    "title": "Devices_companies.csv",
+    "content": "Keywords: example.com, devices_companies, devices_companies.csv\nSource: Devices_companies.md"
+  },
+  {
+    "title": "Diamond cut net test.pdf",
+    "content": "Keywords: diamond, example.com, diamond cut net test, test, diamond cut net test.pdf\nSource: Diamond cut net test.md"
+  },
+  {
+    "title": "Digital Twin.txt",
+    "content": "Keywords: digital twin, digital, digital twin.txt, example.com, twin\nSource: Digital Twin.md"
+  },
+  {
+    "title": "DRAFT The Insurance Agency's Non-Techie Guide to - Matthew Slade.pdf",
+    "content": "Keywords: insurance, techie, example.com, draft the insurance agency's non-techie guide to - matthew slade, agency, draft, draft the insurance agency's non-techie guide to - matthew slade.pdf, matthew, slade, guide\nSource: DRAFT The Insurance Agency's Non-Techie Guide to - Matthew Slade.md"
+  },
+  {
+    "title": "DRAFT w Zoe's notes - The Insurance Agency's Non-Techie Guide to - Matthew Slade[63].pdf",
+    "content": "Keywords: insurance, draft w zoe's notes - the insurance agency's non-techie guide to - matthew slade[63], notes, draft w zoe's notes - the insurance agency's non-techie guide to - matthew slade[63].pdf, techie, example.com, agency, draft, matthew, slade, guide\nSource: DRAFT w Zoe's notes - The Insurance Agency's Non-Techie Guide to - Matthew Slade[63].md"
+  },
+  {
+    "title": "Ducan Consulting.pdf",
+    "content": "Keywords: consulting, ducan consulting.pdf, example.com, ducan consulting, ducan\nSource: Ducan Consulting.md"
+  },
+  {
+    "title": "Duncan Check Up.docx",
+    "content": "Keywords: duncan check up, docx, duncan check up.docx, example.com, check, duncan\nSource: Duncan Check Up.md"
+  },
+  {
+    "title": "Duncan Consulting Invoice.pdf",
+    "content": "Keywords: duncan consulting invoice, consulting, invoice, duncan consulting invoice.pdf, example.com, duncan\nSource: Duncan Consulting Invoice.md"
+  },
+  {
+    "title": "Duncan Invoice 3_14.pdf",
+    "content": "Keywords: duncan invoice 3_14.pdf, duncan invoice 3_14, invoice, 3_14, example.com, duncan\nSource: Duncan Invoice 3_14.md"
+  },
+  {
+    "title": "Duncan Signed Quote.pdf",
+    "content": "Keywords: duncan signed quote, quote, example.com, duncan, duncan signed quote.pdf, signed\nSource: Duncan Signed Quote.md"
+  },
+  {
+    "title": "Duncan Upgrades.pdf",
+    "content": "Keywords: upgrades, example.com, duncan upgrades, duncan, duncan upgrades.pdf\nSource: Duncan Upgrades.md"
+  },
+  {
+    "title": "Duncanins-Audit.docx",
+    "content": "Keywords: duncanins-audit.docx, duncanins-audit, audit, docx, example.com, duncanins\nSource: Duncanins-Audit.md"
+  },
+  {
+    "title": "ebook.docx",
+    "content": "Keywords: docx, ebook.docx, example.com, ebook\nSource: ebook.md"
+  },
+  {
+    "title": "Energy_companies.csv",
+    "content": "Keywords: energy_companies.csv, energy_companies, example.com\nSource: Energy_companies.md"
+  },
+  {
+    "title": "Final Pricing.SRA.Bigleaf.SDWAN.QUOTE.2021.03.29.pdf",
+    "content": "Keywords: final pricing.sra.bigleaf.sdwan.quote.2021.03.29, quote, pricing, sdwan, example.com, bigleaf, 2021, final pricing.sra.bigleaf.sdwan.quote.2021.03.29.pdf, final\nSource: Final Pricing.SRA.Bigleaf.SDWAN.QUOTE.2021.03.29.md"
+  },
+  {
+    "title": "For Edit The Insurance Agency's Non-Techie Guide to - Matthew Slade.docx",
+    "content": "Keywords: for edit the insurance agency's non-techie guide to - matthew slade, insurance, techie, docx, for edit the insurance agency's non-techie guide to - matthew slade.docx, example.com, agency, matthew, edit, slade, guide\nSource: For Edit The Insurance Agency's Non-Techie Guide to - Matthew Slade.md"
+  },
+  {
+    "title": "Full industry source breakdown.docx",
+    "content": "Keywords: full industry source breakdown, industry, docx, example.com, full, source, breakdown, full industry source breakdown.docx\nSource: Full industry source breakdown.md"
+  },
+  {
+    "title": "FusionConnect.txt",
+    "content": "Keywords: fusionconnect, fusionconnect.txt, example.com\nSource: FusionConnect.md"
+  },
+  {
+    "title": "fw9.pdf",
+    "content": "Keywords: fw9.pdf, fw9, example.com\nSource: fw9.md"
+  },
+  {
+    "title": "Gonzales - Armadillo.pdf",
+    "content": "Keywords: example.com, gonzales - armadillo, armadillo, gonzales, gonzales - armadillo.pdf\nSource: Gonzales - Armadillo.md"
+  },
+  {
+    "title": "Google.txt",
+    "content": "Keywords: google.txt, example.com, google\nSource: Google.md"
+  },
+  {
+    "title": "GoTo School Port.pdf",
+    "content": "Keywords: goto, example.com, school, goto school port, goto school port.pdf, port\nSource: GoTo School Port.md"
+  },
+  {
+    "title": "GoTo.txt",
+    "content": "Keywords: goto, goto.txt, example.com\nSource: GoTo.md"
+  },
+  {
+    "title": "GPL License Terms.pdf",
+    "content": "Keywords: terms, license, example.com, gpl license terms, gpl license terms.pdf\nSource: GPL License Terms.md"
+  },
+  {
+    "title": "Hi Rich.docx",
+    "content": "Keywords: docx, example.com, hi rich, rich, hi rich.docx\nSource: Hi Rich.md"
+  },
+  {
+    "title": "HOPP INSURANCE.PDF",
+    "content": "Keywords: insurance, hopp, example.com, hopp insurance.pdf, hopp insurance\nSource: HOPP INSURANCE.md"
+  },
+  {
+    "title": "HullCo Offer.pdf",
+    "content": "Keywords: offer, example.com, hullco, hullco offer.pdf, hullco offer\nSource: HullCo Offer.md"
+  },
+  {
+    "title": "Infrastructure_companies.csv",
+    "content": "Keywords: infrastructure_companies.csv, example.com, infrastructure_companies\nSource: Infrastructure_companies.md"
+  },
+  {
+    "title": "Insurance Specific Consulting[4].docx",
+    "content": "Keywords: specific, insurance specific consulting[4], insurance, consulting, docx, insurance specific consulting[4].docx, example.com\nSource: Insurance Specific Consulting[4].md"
+  },
+  {
+    "title": "INV00229484_A00153126_09262016.pdf",
+    "content": "Keywords: inv00229484_a00153126_09262016, inv00229484_a00153126_09262016.pdf, example.com\nSource: INV00229484_A00153126_09262016.md"
+  },
+  {
+    "title": "Invoice Duncan Switches.pdf",
+    "content": "Keywords: switches, invoice duncan switches, invoice duncan switches.pdf, invoice, example.com, duncan\nSource: Invoice Duncan Switches.md"
+  },
+  {
+    "title": "Invoice Workplace.pdf",
+    "content": "Keywords: invoice, example.com, invoice workplace, invoice workplace.pdf, workplace\nSource: Invoice Workplace.md"
+  },
+  {
+    "title": "Invoice159668.pdf",
+    "content": "Keywords: invoice159668, example.com, invoice159668.pdf\nSource: Invoice159668.md"
+  },
+  {
+    "title": "IT Consolidation Solution 2016 Contract.pdf",
+    "content": "Keywords: it consolidation solution 2016 contract.pdf, example.com, it consolidation solution 2016 contract, solution, consolidation, 2016, contract\nSource: IT Consolidation Solution 2016 Contract.md"
+  },
+  {
+    "title": "Jacobs Insurance.FiberProposal.2022.05.13.pdf",
+    "content": "Keywords: insurance, jacobs, example.com, jacobs insurance.fiberproposal.2022.05.13.pdf, fiberproposal, 2022, jacobs insurance.fiberproposal.2022.05.13\nSource: Jacobs Insurance.FiberProposal.2022.05.13.md"
+  },
+  {
+    "title": "January Comcast Bill.pdf",
+    "content": "Keywords: example.com, january, january comcast bill, bill, comcast, january comcast bill.pdf\nSource: January Comcast Bill.md"
+  },
+  {
+    "title": "Loss Control.pdf",
+    "content": "Keywords: loss control, control, example.com, loss control.pdf, loss\nSource: Loss Control.md"
+  },
+  {
+    "title": "Magna5 Invoice.pdf",
+    "content": "Keywords: invoice, example.com, magna5 invoice, magna5 invoice.pdf, magna5\nSource: Magna5 Invoice.md"
+  },
+  {
+    "title": "Mansur 2025.docx",
+    "content": "Keywords: mansur 2025, docx, 2025, example.com, mansur, mansur 2025.docx\nSource: Mansur 2025.md"
+  },
+  {
+    "title": "Mansur.pdf",
+    "content": "Keywords: mansur, example.com, mansur.pdf\nSource: Mansur.md"
+  },
+  {
+    "title": "Master Agent VAR Program Ammendment[4].pdf",
+    "content": "Keywords: agent, ammendment, program, master, example.com, master agent var program ammendment[4].pdf, master agent var program ammendment[4]\nSource: Master Agent VAR Program Ammendment[4].md"
+  },
+  {
+    "title": "Microsoft.txt",
+    "content": "Keywords: example.com, microsoft.txt, microsoft\nSource: Microsoft.md"
+  },
+  {
+    "title": "Mythos Invoice.pdf",
+    "content": "Keywords: mythos invoice.pdf, invoice, example.com, mythos, mythos invoice\nSource: Mythos Invoice.md"
+  },
+  {
+    "title": "Network Test Results _ GoToConnect.pdf",
+    "content": "Keywords: network, network test results _ gotoconnect, results, gotoconnect, example.com, network test results _ gotoconnect.pdf, test\nSource: Network Test Results _ GoToConnect.md"
+  },
+  {
+    "title": "Nextiva Sales Quote.pdf",
+    "content": "Keywords: quote, nextiva sales quote.pdf, sales, example.com, nextiva sales quote, nextiva\nSource: Nextiva Sales Quote.md"
+  },
+  {
+    "title": "Nextiva.txt",
+    "content": "Keywords: example.com, nextiva, nextiva.txt\nSource: Nextiva.md"
+  },
+  {
+    "title": "NICE.txt",
+    "content": "Keywords: nice, nice.txt, example.com\nSource: NICE.md"
+  },
+  {
+    "title": "Ntirety.txt",
+    "content": "Keywords: ntirety, ntirety.txt, example.com\nSource: Ntirety.md"
+  },
+  {
+    "title": "Omada Controller Upgrade Guide.pdf",
+    "content": "Keywords: guide, controller, example.com, omada, upgrade, omada controller upgrade guide, omada controller upgrade guide.pdf\nSource: Omada Controller Upgrade Guide.md"
+  },
+  {
+    "title": "One Year Quarterly Consulting.pdf",
+    "content": "Keywords: year, consulting, one year quarterly consulting, example.com, one year quarterly consulting.pdf, quarterly\nSource: One Year Quarterly Consulting.md"
+  },
+  {
+    "title": "Proposal Workplace.pdf",
+    "content": "Keywords: proposal, proposal workplace.pdf, example.com, proposal workplace, workplace\nSource: Proposal Workplace.md"
+  },
+  {
+    "title": "Proposal.pdf",
+    "content": "Keywords: proposal.pdf, proposal, example.com\nSource: Proposal.md"
+  },
+  {
+    "title": "Proposed IT Consolidation Solution 2016.pdf",
+    "content": "Keywords: proposed it consolidation solution 2016.pdf, proposed it consolidation solution 2016, example.com, consolidation, solution, proposed, 2016\nSource: Proposed IT Consolidation Solution 2016.md"
+  },
+  {
+    "title": "Proposed IT Consolidation Solution_.pdf",
+    "content": "Keywords: proposed it consolidation solution_, proposed it consolidation solution_.pdf, example.com, consolidation, proposed, solution_\nSource: Proposed IT Consolidation Solution_.md"
+  },
+  {
+    "title": "Providers_companies.csv",
+    "content": "Keywords: example.com, providers_companies.csv, providers_companies\nSource: Providers_companies.md"
+  },
+  {
+    "title": "Quote Armadillo - Gonzales Boring.pdf",
+    "content": "Keywords: quote, quote armadillo - gonzales boring, quote armadillo - gonzales boring.pdf, example.com, boring, armadillo, gonzales\nSource: Quote Armadillo - Gonzales Boring.md"
+  },
+  {
+    "title": "Quote Armadillo-GonzalezBoring.pdf",
+    "content": "Keywords: quote armadillo-gonzalezboring.pdf, quote, gonzalezboring, quote armadillo-gonzalezboring, example.com, armadillo\nSource: Quote Armadillo-GonzalezBoring.md"
+  },
+  {
+    "title": "Quote_Duncan & Associates_10521.1.pdf",
+    "content": "Keywords: quote_duncan & associates_10521.1.pdf, quote_duncan, associates_10521, example.com, quote_duncan & associates_10521.1\nSource: Quote_Duncan & Associates_10521.1.md"
+  },
+  {
+    "title": "Rackspace.txt",
+    "content": "Keywords: rackspace.txt, example.com, rackspace\nSource: Rackspace.md"
+  },
+  {
+    "title": "Release Note.pdf",
+    "content": "Keywords: release note, example.com, release note.pdf, release, note\nSource: Release Note.md"
+  },
+  {
+    "title": "RingCentral.txt",
+    "content": "Keywords: ringcentral, ringcentral.txt, example.com\nSource: RingCentral.md"
+  },
+  {
+    "title": "Sample Case Studies.docx",
+    "content": "Keywords: sample case studies, docx, example.com, sample, case, sample case studies.docx, studies\nSource: Sample Case Studies.md"
+  },
+  {
+    "title": "Sample Consulting.docx",
+    "content": "Keywords: consulting, docx, sample consulting, example.com, sample, sample consulting.docx\nSource: Sample Consulting.md"
+  },
+  {
+    "title": "September18' roster.docx",
+    "content": "Keywords: september18' roster, september18' roster.docx, docx, roster, example.com, september18\nSource: September18' roster.md"
+  },
+  {
+    "title": "Service Offering Details.pdf",
+    "content": "Keywords: offering, example.com, service, service offering details.pdf, details, service offering details\nSource: Service Offering Details.md"
+  },
+  {
+    "title": "Services_companies.csv",
+    "content": "Keywords: services_companies, services_companies.csv, example.com\nSource: Services_companies.md"
+  },
+  {
+    "title": "SheerPDX Contract.pdf",
+    "content": "Keywords: sheerpdx contract, example.com, sheerpdx contract.pdf, sheerpdx, contract\nSource: SheerPDX Contract.md"
+  },
+  {
+    "title": "Software_companies.csv",
+    "content": "Keywords: software_companies.csv, software_companies, example.com\nSource: Software_companies.md"
+  },
+  {
+    "title": "Spectrum Enteprise Fiber Quote -Jacobs Insurance Solutions-30mg.pdf",
+    "content": "Keywords: insurance, spectrum, spectrum enteprise fiber quote -jacobs insurance solutions-30mg.pdf, quote, jacobs, example.com, enteprise, 30mg, spectrum enteprise fiber quote -jacobs insurance solutions-30mg, solutions, fiber\nSource: Spectrum Enteprise Fiber Quote -Jacobs Insurance Solutions-30mg.md"
+  },
+  {
+    "title": "Spectrum.txt",
+    "content": "Keywords: example.com, spectrum.txt, spectrum\nSource: Spectrum.md"
+  },
+  {
+    "title": "Spectrum_Enterprise.txt",
+    "content": "Keywords: spectrum_enterprise, spectrum_enterprise.txt, example.com\nSource: Spectrum_Enterprise.md"
+  },
+  {
+    "title": "SRA.Cost Comparison.ISP Only.2021.04.13.pdf",
+    "content": "Keywords: sra.cost comparison.isp only.2021.04.13, cost, example.com, comparison, 2021, sra.cost comparison.isp only.2021.04.13.pdf, only\nSource: SRA.Cost Comparison.ISP Only.2021.04.13.md"
+  },
+  {
+    "title": "Stock Cert Templante.docx",
+    "content": "Keywords: stock cert templante, stock, cert, docx, example.com, templante, stock cert templante.docx\nSource: Stock Cert Templante.md"
+  },
+  {
+    "title": "Summit Risk Advisors.Fusion Connect.ISP.Discounted Final Version.2021.04.09.pdf",
+    "content": "Keywords: summit, summit risk advisors.fusion connect.isp.discounted final version.2021.04.09, connect, discounted, example.com, risk, version, fusion, 2021, summit risk advisors.fusion connect.isp.discounted final version.2021.04.09.pdf, final, advisors\nSource: Summit Risk Advisors.Fusion Connect.ISP.Discounted Final Version.2021.04.09.md"
+  },
+  {
+    "title": "Summit Update and Compliance.pdf",
+    "content": "Keywords: update, summit, compliance, example.com, summit update and compliance, summit update and compliance.pdf\nSource: Summit Update and Compliance.md"
+  },
+  {
+    "title": "Talking Scripts for Selling Vendor Solutions.docx",
+    "content": "Keywords: scripts, docx, example.com, talking, vendor, talking scripts for selling vendor solutions.docx, solutions, selling, talking scripts for selling vendor solutions\nSource: Talking Scripts for Selling Vendor Solutions.md"
+  },
+  {
+    "title": "Technology Assement Duncan.pdf",
+    "content": "Keywords: duncan, example.com, technology assement duncan, technology assement duncan.pdf, technology, assement\nSource: Technology Assement Duncan.md"
+  },
+  {
+    "title": "Technology Assement.pdf",
+    "content": "Keywords: technology assement.pdf, example.com, technology, assement, technology assement\nSource: Technology Assement.md"
+  },
+  {
+    "title": "tf10000142_win321.pdf",
+    "content": "Keywords: tf10000142_win321.pdf, tf10000142_win321, example.com\nSource: tf10000142_win321.md"
+  },
+  {
+    "title": "The Hauser Group.Service Proposal.2022.09.29.pdf",
+    "content": "Keywords: proposal, group, hauser, the hauser group.service proposal.2022.09.29.pdf, example.com, service, the hauser group.service proposal.2022.09.29, 2022\nSource: The Hauser Group.Service Proposal.2022.09.29.md"
+  },
+  {
+    "title": "The Insurance Agency's Non-Techie Guide to - Matthew Slade.pdf",
+    "content": "Keywords: insurance, techie, example.com, agency, matthew, the insurance agency's non-techie guide to - matthew slade.pdf, the insurance agency's non-techie guide to - matthew slade, slade, guide\nSource: The Insurance Agency's Non-Techie Guide to - Matthew Slade.md"
+  },
+  {
+    "title": "Time Warner.pdf",
+    "content": "Keywords: time warner.pdf, time warner, time, example.com, warner\nSource: Time Warner.md"
+  },
+  {
+    "title": "TPX.txt",
+    "content": "Keywords: tpx, tpx.txt, example.com\nSource: TPX.md"
+  },
+  {
+    "title": "Tsunami Creative Slade Assignment of Contract Proceeds.2017.01.04-1.pdf",
+    "content": "Keywords: 2017, assignment, creative, tsunami, tsunami creative slade assignment of contract proceeds.2017.01.04-1, example.com, proceeds, tsunami creative slade assignment of contract proceeds.2017.01.04-1.pdf, contract, slade\nSource: Tsunami Creative Slade Assignment of Contract Proceeds.2017.01.04-1.md"
+  },
+  {
+    "title": "vendor_details.csv",
+    "content": "Keywords: example.com, vendor_details, vendor_details.csv\nSource: vendor_details.md"
+  },
+  {
+    "title": "Vendor_Integration_Map.docx",
+    "content": "Keywords: docx, vendor_integration_map.docx, vendor_integration_map, example.com\nSource: Vendor_Integration_Map.md"
+  },
+  {
+    "title": "Vern Fonk Case Study.pdf",
+    "content": "Keywords: vern fonk case study, example.com, vern, case, fonk, vern fonk case study.pdf, study\nSource: Vern Fonk Case Study.md"
+  },
+  {
+    "title": "Virsage Signed by Rich Office 365.pdf",
+    "content": "Keywords: virsage signed by rich office 365, virsage signed by rich office 365.pdf, virsage, example.com, rich, office, signed\nSource: Virsage Signed by Rich Office 365.md"
+  },
+  {
+    "title": "Vonage Quote - Hopp Insurance - 07 06 16.pdf",
+    "content": "Keywords: vonage quote - hopp insurance - 07 06 16, vonage, insurance, hopp, vonage quote - hopp insurance - 07 06 16.pdf, quote, example.com\nSource: Vonage Quote - Hopp Insurance - 07 06 16.md"
+  },
+  {
+    "title": "Welpland Insurance.pdf",
+    "content": "Keywords: insurance, welpland, welpland insurance.pdf, example.com, welpland insurance\nSource: Welpland Insurance.md"
+  },
+  {
+    "title": "Wireless_Mobility_companies.csv",
+    "content": "Keywords: wireless_mobility_companies.csv, wireless_mobility_companies, example.com\nSource: Wireless_Mobility_companies.md"
+  },
+  {
+    "title": "Zoom.txt",
+    "content": "Keywords: zoom, example.com, zoom.txt\nSource: Zoom.md"
   }
 ]
